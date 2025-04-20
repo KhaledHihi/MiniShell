@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/03 16:10:17 by khhihi            #+#    #+#             */
-/*   Updated: 2025/04/20 13:07:05 by khhihi           ###   ########.fr       */
+/*   Created: 2024/10/22 22:06:08 by khhihi            #+#    #+#             */
+/*   Updated: 2024/11/02 11:37:54 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int main(int ac, char *av[], char **env)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-    char *input;
-    (void)env;
-    (void)av;
-    (void)ac;
-    input = NULL;
-    while (1)
-    {
-        input = readline("minishell> ");
-        if (input == NULL)
-            break;
-        if (*input)
-            add_history(input);
-        printf("You entered: %s\n", input);
-        free(input);
-    }
-}
+	size_t			i;
+	unsigned char	*s11;
+	unsigned char	*s22;
 
+	i = 0;
+	s11 = (unsigned char *)s1;
+	s22 = (unsigned char *)s2;
+	if (n == 0)
+		return (0);
+	while (s11[i] == s22[i] && i < n - 1)
+		i++;
+	return (s11[i] - s22[i]);
+}

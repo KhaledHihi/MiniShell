@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/03 16:10:17 by khhihi            #+#    #+#             */
-/*   Updated: 2025/04/20 13:07:05 by khhihi           ###   ########.fr       */
+/*   Created: 2024/11/04 15:57:41 by khhihi            #+#    #+#             */
+/*   Updated: 2024/11/07 14:04:02 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int main(int ac, char *av[], char **env)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-    char *input;
-    (void)env;
-    (void)av;
-    (void)ac;
-    input = NULL;
-    while (1)
-    {
-        input = readline("minishell> ");
-        if (input == NULL)
-            break;
-        if (*input)
-            add_history(input);
-        printf("You entered: %s\n", input);
-        free(input);
-    }
-}
+	t_list	*new;
 
+	if (!lst || !f)
+		return ;
+	new = lst;
+	while (new)
+	{
+		f(new->content);
+		new = new->next;
+	}
+}

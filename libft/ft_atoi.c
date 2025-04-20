@@ -1,33 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/03 16:10:17 by khhihi            #+#    #+#             */
-/*   Updated: 2025/04/20 13:07:05 by khhihi           ###   ########.fr       */
+/*   Created: 2024/10/22 15:49:57 by khhihi            #+#    #+#             */
+/*   Updated: 2024/11/08 13:21:47 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int main(int ac, char *av[], char **env)
+int	ft_atoi(const char *str)
 {
-    char *input;
-    (void)env;
-    (void)av;
-    (void)ac;
-    input = NULL;
-    while (1)
-    {
-        input = readline("minishell> ");
-        if (input == NULL)
-            break;
-        if (*input)
-            add_history(input);
-        printf("You entered: %s\n", input);
-        free(input);
-    }
-}
+	int		i;
+	int		s;
+	long	r;
 
+	i = 0;
+	s = 1;
+	r = 0;
+	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
+		i++;
+	if (str[i] == '+' || str[i] == '-')
+	{
+		if (str[i] == '-')
+			s *= -1;
+		i++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		r = r * 10 + (str[i] - 48);
+		if (r < 0)
+			return ((-s * (s == 1)));
+		i++;
+	}
+	return (s * r);
+}

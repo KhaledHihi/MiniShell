@@ -6,11 +6,11 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 10:55:58 by khhihi            #+#    #+#             */
-/*   Updated: 2025/04/11 16:43:59 by khhihi           ###   ########.fr       */
+/*   Updated: 2024/11/07 11:40:51 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
 static int	ft_countw(char const *s1, char c)
 {

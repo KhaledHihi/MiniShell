@@ -1,33 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/03 16:10:17 by khhihi            #+#    #+#             */
-/*   Updated: 2025/04/20 13:07:05 by khhihi           ###   ########.fr       */
+/*   Created: 2024/10/22 22:24:53 by khhihi            #+#    #+#             */
+/*   Updated: 2024/11/07 10:37:50 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int main(int ac, char *av[], char **env)
+static char	*ft_strcpy(char *dest, char *src)
 {
-    char *input;
-    (void)env;
-    (void)av;
-    (void)ac;
-    input = NULL;
-    while (1)
-    {
-        input = readline("minishell> ");
-        if (input == NULL)
-            break;
-        if (*input)
-            add_history(input);
-        printf("You entered: %s\n", input);
-        free(input);
-    }
+	int	i;
+
+	i = 0;
+	while (src[i] != '\0')
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }
 
+char	*ft_strdup(const char *s1)
+{
+	int		i;
+	char	*p;
+
+	i = 0;
+	while (s1[i])
+		i++;
+	p = (char *)malloc(sizeof(char) * (i + 1));
+	if (!p)
+		return (NULL);
+	return (ft_strcpy(p, (char *)s1));
+}
