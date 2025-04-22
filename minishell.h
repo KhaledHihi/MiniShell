@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:10:41 by khhihi            #+#    #+#             */
-/*   Updated: 2025/04/22 19:15:02 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/04/22 21:26:43 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,13 @@ typedef enum s_quote_type
 	DOUBLE_QUOTE,
 }						t_quote_type;
 
+
 typedef struct s_token
 {
-	t_type		type;
-	char				*value;
-	struct s_token		*next;
-}						t_token;
+	char			*value;
+	t_type			token_type;
+	t_quote_type	quote_type;
+	struct s_token	*next;
+}					t_token;
 
 #endif

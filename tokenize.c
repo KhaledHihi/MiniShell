@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 20:24:20 by khhihi            #+#    #+#             */
-/*   Updated: 2025/04/22 19:28:05 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/04/22 21:28:02 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,33 @@ char get_quote_value(char *input, int *i, t_quote_type *quote_type)
 char get_word_value(char *input, int *i)
 {
 	int start;
-	char *value;
 
+	start = *i;
+	while (input[*i] && input[*i] != '\'' && input[*i] > 32
+			&& input[*i] != '|' && input[*i] != '>' && input[*i] != '<')
+			(*i)++;
+	return (ft_substr(input, start, *i - start));
 }
+t_token *ft_lstnew_token(char *value, t_token *type, t_quote_type *quote)
+{
+	t_token	*new;
 
+	new = malloc(sizeof(t_token));
+	if(!new)
+		return (NULL);
+	new->value = value;
+	new->token_type = type;
+	new->quote_type = quote;
+	new->next = NULL;
+	return (new);
+}
 t_token *tokenize(char *input)
 {
 	t_token *tokens;
 	int 	i;
 	char 	*value;
 	t_quote_type quote_type;
+	t_type	type;
 
 	tokens = NULL;
 	i = 0;
@@ -60,5 +77,6 @@ t_token *tokenize(char *input)
 			value = get_quote_value(input, &i, &quote_type);
 		else
 			value = get_word_value(input, &i);
+		ft_lstadd_back(&tokens, ft_lstnew_token(value, &type, &quote_type));
 	}
 }
