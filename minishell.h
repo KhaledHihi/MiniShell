@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:10:41 by khhihi            #+#    #+#             */
-/*   Updated: 2025/04/22 21:26:43 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/04/23 19:25:23 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ typedef enum s_type
 	APPEND,
 	HEREDOC,
 	SEMICOLON,
-}				t_type;
+}					t_type;
 
 typedef enum s_quote_type
 {
 	NO_QUOTE,
 	SINGLE_QUOTE,
 	DOUBLE_QUOTE,
-}						t_quote_type;
+}					t_quote_type;
 
 
 typedef struct s_token
@@ -52,5 +52,8 @@ typedef struct s_token
 	t_quote_type	quote_type;
 	struct s_token	*next;
 }					t_token;
+
+t_token *tokenize(char *input);
+void 	print_node(t_token *list);
 
 #endif

@@ -2,12 +2,12 @@ NAME = minishell
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRC = main.c
+SRC = main.c tokenize.c print_list.c
 
 OBJ = $(SRC:.c=.o)
-
+libft = libft/libft.a
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) -lreadline
+	$(CC) $(CFLAGS) $(OBJ) $(libft) -o $(NAME) -lreadline
 
 all : $(NAME)
 
