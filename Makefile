@@ -2,11 +2,14 @@ NAME = minishell
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRC = main.c tokenize.c print_list.c
+SRC = main.c tokenize.c print_list.c init_env.c
 
 OBJ = $(SRC:.c=.o)
+
 libft = libft/libft.a
+
 $(NAME): $(OBJ)
+	@$(MAKE) -C libft
 	$(CC) $(CFLAGS) $(OBJ) $(libft) -o $(NAME) -lreadline
 
 all : $(NAME)
@@ -15,11 +18,11 @@ all : $(NAME)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(RM) $(OBJ) $(BNS_OBJ)
+	rm -rf $(OBJ)
 	@$(MAKE) -C libft clean
 
 fclean: clean
-	$(RM) $(NAME) $(BNS_NAME)
+	rm -rf $(NAME)
 	@$(MAKE) -C libft fclean
 
 re: fclean all

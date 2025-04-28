@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 20:24:20 by khhihi            #+#    #+#             */
-/*   Updated: 2025/04/23 19:25:51 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/04/28 16:44:01 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,24 @@ char *get_quote_value(char *input, int *i, t_quote_type *quote_type)
 	int		start;
 	char	*value;
 
+	*quote_type = NO_QUOTE;
 	quote = input[*i];
 	(*i)++;
 	start = *i;
 	while(input[*i] && input[*i] != quote)
-		i++;
-	value = ft_substr(input, *i, *i - start);
+		(*i)++;
+	value = ft_substr(input, start, *i - start);
 	if (input[*i] == quote)
 		(*i)++;
+	else
+	{
+		free(value);
+		return (NULL);
+	}
 	if(quote == '\'')
 		*quote_type = SINGLE_QUOTE;
 	else if(quote == '"')
 		*quote_type = DOUBLE_QUOTE;
-	else
-		*quote_type = NO_QUOTE;
 	return (value);
 }
 char *get_word_value(char *input, int *i)
@@ -72,6 +76,39 @@ void	add_token_back(t_token **head, t_token *new_token)
 		tmp->next = new_token;
 	}
 }
+char *get_op(char *input, int *i)
+{
+	char *op;
+	if(!ft_strncmp(input + *i, ">>", 2) || !ft_strncmp(input + *i, "<<", 2))
+	{
+		op = ft_substr(input, *i, 2);
+		*i += 2;
+		if (input[*i] == '>' || input[*i] == '<')
+			return (NULL);
+	}
+	else
+	{
+		op= ft_substr(input, *i, 1);
+		*i += 1;
+		if (input[*i] == '|')
+			return (NULL);
+	}
+	return (op);
+}
+t_type get_token_type(char *value)
+{
+	if (!ft_strncmp(value, "|", 1))
+		return (PIPE);
+	else if (!ft_strncmp(value, ">", 1))
+		return (REDIRECT_OUT);
+	else if (!ft_strncmp(value, "<", 1))
+		return (REDIRECT_IN);
+	else if (!ft_strncmp(value, ">>", 2))
+		return (APPEND);
+	else if (!ft_strncmp(value, "<<", 1))
+		return (HEREDOC);
+	return (WORD);
+}
 t_token *tokenize(char *input)
 {
 	t_token *tokens;
@@ -85,16 +122,36 @@ t_token *tokenize(char *input)
 	i = 0;
 	while(input[i])
 	{
+		quote_type = 0;
 		while(input[i] <= 32)
 			i++;
 		if (input[i] == '\0')
 			break;
 		if (input[i] == '\'' || input[i] == '"')
+		{
 			value = get_quote_value(input, &i, &quote_type);
+			if(!value)
+			{
+				tokens = NULL;
+				break;
+			}
+		}
+		else if (input[i] == '|' || input[i] == '>' || input[i] == '<')
+		{
+			value = get_op(input, &i);
+			if (!value)
+			{
+				tokens = NULL;
+				break;
+			}
+		}
 		else
 			value = get_word_value(input, &i);
-		add_token_back(&tokens, ft_lstnew_token(value, type, quote_type));
+		if (value[0] > 32 && ft_strlen(value) >= 1)
+		{	
+			type = get_token_type(value);
+			add_token_back(&tokens, ft_lstnew_token(value, type, quote_type));
+		}
 	}
-	print_node(tokens);
 	return (tokens);
 }
