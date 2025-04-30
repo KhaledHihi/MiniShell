@@ -11,3 +11,12 @@ void print_node(t_token *list)
 		list = list->next;
 	}
 }
+void print_lst(t_env *list)
+{
+	while(list)
+	{
+		printf("lst key : %s\n", list->key);
+		printf("lst value : %s\n", list->value);
+		list = list->next;
+	}
+}
