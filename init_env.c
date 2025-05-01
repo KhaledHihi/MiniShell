@@ -22,6 +22,8 @@ t_env   *int_env(char **env)
     char *equal_address;
     
     i =     0;
+    new_env = NULL;
+    lst = NULL;
     while (env[i])
     {
         j = 0;
