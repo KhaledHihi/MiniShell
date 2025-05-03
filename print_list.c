@@ -1,8 +1,8 @@
 #include "minishell.h"
 
-void print_node(t_token *list)
+void	print_node(t_token *list)
 {
-	while(list)
+	while (list)
 	{
 		printf("%s\n", list->value);
 		printf("token_type : %d\n", list->token_type);
@@ -11,9 +11,9 @@ void print_node(t_token *list)
 		list = list->next;
 	}
 }
-void print_lst(t_env *list)
+void	print_lst(t_env *list)
 {
-	while(list)
+	while (list)
 	{
 		printf("lst key : %s\n", list->key);
 		printf("lst value : %s\n", list->value);

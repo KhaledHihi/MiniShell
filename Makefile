@@ -2,7 +2,7 @@ NAME = minishell
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRC = main.c tokenize.c print_list.c init_env.c prs_cmd.c
+SRC = main.c tokenize.c print_list.c init_env.c 
 
 OBJ = $(SRC:.c=.o)
 
