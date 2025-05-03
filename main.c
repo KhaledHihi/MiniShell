@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:10:17 by khhihi            #+#    #+#             */
-/*   Updated: 2025/04/29 20:01:02 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/05/01 23:00:13 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ void parsing_cmd(char *input, char **env)
     tokens = tokenize(input);
     if (!tokens)
         printf("syntax error\n");
-    
+    print_node(tokens);
     //store env variables in list
     lst_env =  int_env(env);
-    print_lst(lst_env);
-    
+    // print_lst(lst_env);
+    (void)lst_env;    
     
 }
 int main(int ac, char *av[], char **env)
