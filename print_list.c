@@ -20,3 +20,23 @@ void	print_lst(t_env *list)
 		list = list->next;
 	}
 }
+
+void	print_cmd(t_cmd *list)
+{
+	printf("test");
+	while (list)
+	{
+		int i = 0;
+		printf("Node:\n");
+		if (list->arg)
+		{
+			while (list->arg[i])
+			{
+				printf("  arg[%d]: %s\n", i, list->arg[i]);
+				i++;
+			}
+		}
+		printf("-----------\n");
+		list = list->next;
+	}
+}

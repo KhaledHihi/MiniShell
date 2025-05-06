@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:10:41 by khhihi            #+#    #+#             */
-/*   Updated: 2025/05/01 20:20:36 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/05/05 15:28:38 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,17 @@ typedef struct s_cmd
 {
 	char **arg;
 	char **env;
-	struct s_cmd *next;	
+	char **input;
+	char **output;
+	struct s_cmd *next;
 }					t_cmd;
 
 t_token *tokenize(char *input);
 void 	print_node(t_token *list);
 t_env   *int_env(char **env);
 void 	print_lst(t_env *list);
-char **prs_cmd(t_token *tokens);
+t_cmd	*prs_cmd(t_token *tokens);
+char **realoc_arr(char **arr, char *str);
+void	print_cmd(t_cmd *list);
 
 #endif

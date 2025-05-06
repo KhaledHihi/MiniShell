@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:10:17 by khhihi            #+#    #+#             */
-/*   Updated: 2025/05/03 15:30:26 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/05/03 16:39:23 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,21 @@ void	parsing_cmd(char *input, char **env)
 {
 	t_token	*tokens;
 	t_env	*lst_env;
-
+	t_cmd	*cmd;
 	// split the command into tokens
+	(void)lst_env;
+	(void)env;
+	// (void)env;
+
 	tokens = tokenize(input);
 	if (!tokens)
-		printf("syntax error\n");
+		return ;
 	print_node(tokens);
 	// store env variables in list
 	lst_env = int_env(env);
 	// print_lst(lst_env);
-	(void)lst_env;
+	cmd = prs_cmd(tokens);
+	print_cmd(cmd);
 }
 int	main(int ac, char *av[], char **env)
 {
