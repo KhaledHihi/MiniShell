@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 20:24:20 by khhihi            #+#    #+#             */
-/*   Updated: 2025/05/07 20:00:55 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/05/09 12:48:55 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ char	*get_quote_value(char *input, int *i, t_quote_type *quote_type)
 		*quote_type = DOUBLE_QUOTE;
 	return (value);
 }
+
 char	*get_word_value(char *input, int *i)
 {
 	int	start;
@@ -48,6 +49,7 @@ char	*get_word_value(char *input, int *i)
 		(*i)++;
 	return (ft_substr(input, start, *i - start));
 }
+
 t_token	*ft_lstnew_token(char *value, t_type type, t_quote_type quote)
 {
 	t_token	*new;
@@ -76,6 +78,7 @@ void	add_token_back(t_token **head, t_token *new_token)
 		tmp->next = new_token;
 	}
 }
+
 char	*get_op(char *input, int *i)
 {
 	char	*op;
@@ -96,6 +99,7 @@ char	*get_op(char *input, int *i)
 	}
 	return (op);
 }
+
 t_type	get_token_type(char *value)
 {
 	if (!ft_strncmp(value, "|", 1))
@@ -110,6 +114,7 @@ t_type	get_token_type(char *value)
 		return (REDIRECT_IN);
 	return (WORD);
 }
+
 t_token	*tokenize(char *input)
 {
 	t_token			*tokens;

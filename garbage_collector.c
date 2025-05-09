@@ -1,34 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   realoc.c                                           :+:      :+:    :+:   */
+/*   garbage_collector.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/03 14:37:13 by khhihi            #+#    #+#             */
-/*   Updated: 2025/05/03 16:36:31 by khhihi           ###   ########.fr       */
+/*   Created: 2025/05/09 12:40:13 by khhihi            #+#    #+#             */
+/*   Updated: 2025/05/09 13:05:43 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**realoc_arr(char **arr, char *str)
+void	*ft_malloc(size_t size, int type)
 {
-	int		i;
-	int		len;
-	char	**new_arr;
+	static t_list	*head = NULL;
+	t_list			*new_node;
 
-	i = -1;
-	len = 0;
-	while (arr && arr[len])
-		len++;
-	new_arr = malloc(sizeof(char *) * len + 2);
-	if (!new_arr)
-		return (NULL);
-	while (len > ++i)
-		new_arr[i] = arr[i];
-	new_arr[i] = ft_strdup(str);
-	new_arr[++i] = NULL;
-	free(arr);
-	return (new_arr);
+	if (type == 0)
+	{
+		new_node = malloc(sizeof(t_list));
+		if (!new_node)
+			return (NULL);
+		new_node->content = malloc(size);
+		new_node->next = NULL;
+		if (!head)
+			head = new_node;
+		else
+		{
+			new_node->next = head;
+			head = new_node;
+		}
+		return (new_node->content);
+	}
+	else if (type == 1)
+		ft_lstclear(&head, free);
+	return (NULL);
 }

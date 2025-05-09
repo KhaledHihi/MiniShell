@@ -40,21 +40,21 @@ void	add_cmd_to_lst(t_cmd **lst, t_cmd *new)
 
 void	handle_redirection(t_token **token, t_cmd *cmd)
 {
-    if (!token || !(*token) || !cmd)
-        return; // Ensure input pointers are valid
-
-    if ((*token)->token_type == REDIRECT_IN || (*token)->token_type == HEREDOC)
-    {
-        *token = (*token)->next;
-        if (*token && (*token)->value)
-            cmd->input = realoc_arr(cmd->input, (*token)->value);
-    }
-    else if ((*token)->token_type == REDIRECT_OUT || (*token)->token_type == APPEND)
-    {
-        *token = (*token)->next;
-        if (*token && (*token)->value)
-            cmd->output = realoc_arr(cmd->output, (*token)->value);
-    }
+	if (!token || !(*token) || !cmd)
+		return ; // Ensure input pointers are valid
+	if ((*token)->token_type == REDIRECT_IN || (*token)->token_type == HEREDOC)
+	{
+		*token = (*token)->next;
+		if (*token && (*token)->value)
+			cmd->input = realoc_arr(cmd->input, (*token)->value);
+	}
+	else if ((*token)->token_type == REDIRECT_OUT
+		|| (*token)->token_type == APPEND)
+	{
+		*token = (*token)->next;
+		if (*token && (*token)->value)
+			cmd->output = realoc_arr(cmd->output, (*token)->value);
+	}
 }
 
 t_cmd	*prs_cmd(t_token *tokens)
@@ -76,7 +76,7 @@ t_cmd	*prs_cmd(t_token *tokens)
 		if (tokens->token_type == WORD)
 			curr_cmd->arg = realoc_arr(curr_cmd->arg, tokens->value);
 		else
-            handle_redirection(&tokens, curr_cmd);
+			handle_redirection(&tokens, curr_cmd);
 		tokens = tokens->next;
 	}
 	return (cmd_lst);

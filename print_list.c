@@ -23,10 +23,13 @@ void	print_lst(t_env *list)
 
 void	print_cmd(t_cmd *list)
 {
-	int j = 0;
+	int	j;
+	int	i;
+
+	j = 0;
 	while (list)
 	{
-		int i = 0;
+		i = 0;
 		printf("Node:\n");
 		if (list->arg)
 		{
@@ -37,14 +40,14 @@ void	print_cmd(t_cmd *list)
 			}
 			j = 0;
 			if (list->input)
-				while(list->input[j])
+				while (list->input[j])
 				{
 					printf("  input: %s\n", list->input[j]);
 					j++;
 				}
 			j = 0;
 			if (list->output)
-				while(list->output[j])
+				while (list->output[j])
 				{
 					printf("  output: %s\n", list->output[j]);
 					j++;

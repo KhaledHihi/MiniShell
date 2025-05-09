@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:10:41 by khhihi            #+#    #+#             */
-/*   Updated: 2025/05/05 15:28:38 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/05/09 12:40:30 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,6 @@ void 	print_lst(t_env *list);
 t_cmd	*prs_cmd(t_token *tokens);
 char **realoc_arr(char **arr, char *str);
 void	print_cmd(t_cmd *list);
+void	*ft_malloc(size_t size, int type);
 
 #endif

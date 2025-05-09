@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:10:17 by khhihi            #+#    #+#             */
-/*   Updated: 2025/05/08 20:14:35 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/05/09 12:50:46 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@ void	parsing_cmd(char *input, char **env)
 	t_token	*tokens;
 	t_env	*lst_env;
 	t_cmd	*cmd;
-	// split the command into tokens
+
 	(void)lst_env;
 	(void)env;
 	(void)cmd;
-	// (void)env;
-	if ((input == NULL || !ft_strncmp(input, "exit", 4)) && (ft_strlen(input) == 4))
+	(void)env;
+	if ((input == NULL || !ft_strncmp(input, "exit", 4))
+		&& (ft_strlen(input) == 4))
 	{
 		printf("\033[1;31mexit\033[0m\n");
 		free(input);
