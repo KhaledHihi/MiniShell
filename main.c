@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:10:17 by khhihi            #+#    #+#             */
-/*   Updated: 2025/05/09 12:50:46 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/05/09 18:31:54 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	parsing_cmd(char *input, char **env)
 		&& (ft_strlen(input) == 4))
 	{
 		printf("\033[1;31mexit\033[0m\n");
+		ft_malloc(0, 1);
 		free(input);
 		exit(0);
 	}

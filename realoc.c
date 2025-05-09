@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 14:37:13 by khhihi            #+#    #+#             */
-/*   Updated: 2025/05/03 16:36:31 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/05/09 18:23:41 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	**realoc_arr(char **arr, char *str)
 	len = 0;
 	while (arr && arr[len])
 		len++;
-	new_arr = malloc(sizeof(char *) * len + 2);
+	new_arr = ft_malloc(sizeof(char *) * len + 2, 0);
 	if (!new_arr)
 		return (NULL);
 	while (len > ++i)

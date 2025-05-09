@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 20:24:20 by khhihi            #+#    #+#             */
-/*   Updated: 2025/05/09 12:48:55 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/05/09 19:16:02 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_token	*ft_lstnew_token(char *value, t_type type, t_quote_type quote)
 {
 	t_token	*new;
 
-	new = malloc(sizeof(t_token));
+	new = ft_malloc(sizeof(t_token), 0);
 	if (!new)
 		return (NULL);
 	new->value = value;

@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 16:03:22 by khhihi            #+#    #+#             */
-/*   Updated: 2025/04/23 19:22:10 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/05/09 18:30:42 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdint.h>
+# include "../minishell.h"
+
 
 typedef struct s_list
 {

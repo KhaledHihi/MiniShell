@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 16:09:54 by khhihi            #+#    #+#             */
-/*   Updated: 2025/05/08 17:28:52 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/05/09 18:28:58 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_cmd	*create_new_cmd(void)
 {
 	t_cmd	*new;
 
-	new = malloc(sizeof(t_cmd));
+	new = ft_malloc(sizeof(t_cmd), 0);
 	if (!new)
 		return (NULL);
 	ft_bzero(new, sizeof(t_cmd));
@@ -40,7 +40,7 @@ void	add_cmd_to_lst(t_cmd **lst, t_cmd *new)
 
 void	handle_redirection(t_token **token, t_cmd *cmd)
 {
-	if (!token || !(*token) || !cmd)
+	if (!token || !(*token) || !cmd || !(*token)->next)
 		return ; // Ensure input pointers are valid
 	if ((*token)->token_type == REDIRECT_IN || (*token)->token_type == HEREDOC)
 	{

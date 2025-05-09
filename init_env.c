@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 19:13:35 by khhihi            #+#    #+#             */
-/*   Updated: 2025/05/09 12:48:08 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/05/09 18:24:55 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_env	*create_env_node(char *env_var)
 	char	*equal_address;
 	int		key_length;
 
-	new_env = malloc(sizeof(t_env));
+	new_env = ft_malloc(sizeof(t_env), 0);
 	if (!new_env)
 		return (NULL);
 	equal_address = ft_strchr(env_var, '=');
