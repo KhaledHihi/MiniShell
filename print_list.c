@@ -23,7 +23,7 @@ void	print_lst(t_env *list)
 
 void	print_cmd(t_cmd *list)
 {
-	printf("test");
+	int j = 0;
 	while (list)
 	{
 		int i = 0;
@@ -35,6 +35,20 @@ void	print_cmd(t_cmd *list)
 				printf("  arg[%d]: %s\n", i, list->arg[i]);
 				i++;
 			}
+			j = 0;
+			if (list->input)
+				while(list->input[j])
+				{
+					printf("  input: %s\n", list->input[j]);
+					j++;
+				}
+			j = 0;
+			if (list->output)
+				while(list->output[j])
+				{
+					printf("  output: %s\n", list->output[j]);
+					j++;
+				}
 		}
 		printf("-----------\n");
 		list = list->next;

@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 16:09:54 by khhihi            #+#    #+#             */
-/*   Updated: 2025/05/05 21:39:52 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/05/08 17:28:52 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,27 +40,21 @@ void	add_cmd_to_lst(t_cmd **lst, t_cmd *new)
 
 void	handle_redirection(t_token **token, t_cmd *cmd)
 {
+    if (!token || !(*token) || !cmd)
+        return; // Ensure input pointers are valid
 
-	if ((*token)->token_type == REDIRECT_IN)
-	{
-		*token = (*token)->next;
-		if (!(*token))
-			cmd->input = realoc_arr(cmd->input, (*token)->value);
-	}
-	else if ((*token)->token_type == REDIRECT_OUT)
-	{
-		*token = (*token)->next;
-		if (!(*token))
-			cmd->output = realoc_arr(cmd->output, (*token)->value);
-	}
-	else if ((*token)->token_type == APPEND)
-	{
-		
-	}
-	else if ((*token)->token_type == HEREDOC)
-	{
-
-	}
+    if ((*token)->token_type == REDIRECT_IN || (*token)->token_type == HEREDOC)
+    {
+        *token = (*token)->next;
+        if (*token && (*token)->value)
+            cmd->input = realoc_arr(cmd->input, (*token)->value);
+    }
+    else if ((*token)->token_type == REDIRECT_OUT || (*token)->token_type == APPEND)
+    {
+        *token = (*token)->next;
+        if (*token && (*token)->value)
+            cmd->output = realoc_arr(cmd->output, (*token)->value);
+    }
 }
 
 t_cmd	*prs_cmd(t_token *tokens)

@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 20:24:20 by khhihi            #+#    #+#             */
-/*   Updated: 2025/04/28 16:44:01 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/05/07 20:00:55 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,14 +100,14 @@ t_type	get_token_type(char *value)
 {
 	if (!ft_strncmp(value, "|", 1))
 		return (PIPE);
+	else if (!ft_strncmp(value, ">>", 2))
+		return (APPEND);
+	else if (!ft_strncmp(value, "<<", 2))
+		return (HEREDOC);
 	else if (!ft_strncmp(value, ">", 1))
 		return (REDIRECT_OUT);
 	else if (!ft_strncmp(value, "<", 1))
 		return (REDIRECT_IN);
-	else if (!ft_strncmp(value, ">>", 2))
-		return (APPEND);
-	else if (!ft_strncmp(value, "<<", 1))
-		return (HEREDOC);
 	return (WORD);
 }
 t_token	*tokenize(char *input)
