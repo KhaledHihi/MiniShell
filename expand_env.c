@@ -1,0 +1,105 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expand_env.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/13 15:36:32 by khhihi            #+#    #+#             */
+/*   Updated: 2025/05/13 16:01:43 by khhihi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell.h"
+
+// Function to handle single-quoted text
+char *handle_single_quotes(const char *word, int *index, char *result) {
+    (*index)++;
+    while (word[*index] && word[*index] != '\'') {
+        result = ft_strjoin_char(result, word[*index]);
+        (*index)++;
+    }
+    if (word[*index]) (*index)++;
+    return result;
+}
+
+// Function to handle environment variable expansion
+char *expand_env_variable(const char *word, int *index, t_env *env, char *result) {
+    int start = ++(*index);
+    while (word[*index] && (ft_isalnum(word[*index]) || word[*index] == '_'))
+        (*index)++;
+
+    char *key = ft_substr(word, start, *index - start);
+    char *value = get_env_value(env, key);
+    if (!value)
+        value = ft_strdup("");
+    free(key);
+
+    for (int j = 0; value[j]; j++) {
+        while (value[j] <= 32 && value[j + 1] <= 32)
+            j++;
+        result = ft_strjoin_char(result, value[j]);
+    }
+    return result;
+}
+
+// Function to handle double-quoted text
+char *handle_double_quotes(const char *word, int *index, t_env *env, char *result) {
+    (*index)++;
+    while (word[*index] && word[*index] != '"') {
+        if (word[*index] == '$' && word[*index + 1] && (ft_isalnum(word[*index + 1]) || word[*index + 1] == '_')) {
+            result = expand_env_variable(word, index, env, result);
+        } else {
+            result = ft_strjoin_char(result, word[*index]);
+            (*index)++;
+        }
+    }
+    if (word[*index]) (*index)++;
+    return result;
+}
+
+// Function to handle special cases like $? and $<number>
+char *handle_special_cases(const char *word, int *index, char *result) {
+    if (word[*index] == '$' && word[*index + 1] == '?') {
+        (*index) += 2;
+        result = ft_strjoin(result, ft_itoa(0));
+    } else if (word[*index] == '$' && ft_isdigit(word[*index + 1])) {
+        (*index) += 2;
+    }
+    return result;
+}
+
+// Main function to expand variable values
+char *expand_variable_value(char *word, t_env *env) {
+    int i = 0;
+    char *result = ft_strdup("");
+
+    while (word[i]) {
+        if (word[i] == '\'') {
+            result = handle_single_quotes(word, &i, result);
+        } else if (word[i] == '$' && word[i + 1] && (ft_isalpha(word[i + 1]) || word[i + 1] == '_')) {
+            result = expand_env_variable(word, &i, env, result);
+        } else if (word[i] == '"') {
+            result = handle_double_quotes(word, &i, env, result);
+        } else if (word[i] == '$') {
+            result = handle_special_cases(word, &i, result);
+        } else {
+            result = ft_strjoin_char(result, word[i]);
+            i++;
+        }
+    }
+    return result;
+}
+
+// Expand variables and remove quotes for a list of tokens
+void expand_variables_and_remove_quotes(t_token *tokens, t_env *env) {
+    char *expanded_value;
+
+    while (tokens) {
+        if (tokens->token_type == WORD) {
+            expanded_value = expand_variable_value(tokens->value, env);
+            tokens->value = expanded_value; // Assume the old value is freed elsewhere
+        }
+        tokens = tokens->next;
+    }
+}

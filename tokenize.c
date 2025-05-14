@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 20:24:20 by khhihi            #+#    #+#             */
-/*   Updated: 2025/05/09 19:16:02 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/05/11 20:02:47 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,30 @@ char	*get_quote_value(char *input, int *i, t_quote_type *quote_type)
 	return (value);
 }
 
-char	*get_word_value(char *input, int *i)
+char	*get_word_value(char *input, int *i, t_quote_type *quote_type)
 {
 	int	start;
+	char quote;
 
 	start = *i;
-	while (input[*i] && input[*i] != '\'' && input[*i] > 32 && input[*i] != '|'
-		&& input[*i] != '>' && input[*i] != '<')
+	while (input[*i] && (input[*i] != '|' && input[*i] != '>'
+			&& input[*i] != '<') && input[*i] > 32)
+	{
+		if (input[*i] == '"' || input[*i] == '\'')
+		{
+			quote = input[*i];
+			(*i)++;
+			while (input[*i] && input[*i] != quote)
+				(*i)++;
+			if (input[*i] != quote)
+				return (NULL);
+			if (quote == '\'')
+				*quote_type = SINGLE_QUOTE;
+			else if (quote == '"') 
+				*quote_type = DOUBLE_QUOTE;
+		}
 		(*i)++;
+	}
 	return (ft_substr(input, start, *i - start));
 }
 
@@ -133,15 +149,15 @@ t_token	*tokenize(char *input)
 			i++;
 		if (input[i] == '\0')
 			break ;
-		if (input[i] == '\'' || input[i] == '"')
-		{
-			value = get_quote_value(input, &i, &quote_type);
-			if (!value)
-			{
-				tokens = NULL;
-				break ;
-			}
-		}
+		// if (input[i] == '\'' || input[i] == '"')
+		// {
+		// 	value = get_quote_value(input, &i, &quote_type);
+		// 	if (!value)
+		// 	{
+		// 		tokens = NULL;
+		// 		break ;
+		// 	}
+		// }
 		else if (input[i] == '|' || input[i] == '>' || input[i] == '<')
 		{
 			value = get_op(input, &i);
@@ -152,7 +168,14 @@ t_token	*tokenize(char *input)
 			}
 		}
 		else
-			value = get_word_value(input, &i);
+		{
+			value = get_word_value(input, &i, &quote_type);
+			if (!value)
+			{
+				tokens = NULL;
+				break ;
+			}
+		}
 		if (value[0] > 32 && ft_strlen(value) >= 1)
 		{
 			type = get_token_type(value);
