@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:10:41 by khhihi            #+#    #+#             */
-/*   Updated: 2025/05/09 12:40:30 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/05/19 15:31:44 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,24 @@ typedef struct s_env
 	struct s_env	*next;
 }					t_env;
 
+
+typedef struct s_redirection
+{
+	char *file;
+	t_type	type;
+	t_quote_type	quote_type;
+	struct s_redirection *next;
+}					t_redirection;
+
 typedef struct s_cmd
 {
-	char **arg;
-	char **env;
-	char **input;
-	char **output;
-	struct s_cmd *next;
+	char 			**arg;
+	char 			**env;
+	int				append;
+	int				heredoc;
+	char			*heredoc_file;
+	t_redirection	*redirection;
+	struct s_cmd 	*next;
 }					t_cmd;
 
 t_token *tokenize(char *input);
@@ -75,7 +86,9 @@ t_env   *int_env(char **env);
 void 	print_lst(t_env *list);
 t_cmd	*prs_cmd(t_token *tokens);
 char **realoc_arr(char **arr, char *str);
-void	print_cmd(t_cmd *list);
+void print_cmd(t_cmd *cmd);
 void	*ft_malloc(size_t size, int type);
+void expand_variables_and_remove_quotes(t_token *tokens, t_env *env);
+char	*ft_strjoin_char(char const *s1, char s2);
 
 #endif

@@ -2,7 +2,7 @@ NAME = minishell
 
 CFLAGS = -Wall -Wextra -Werror -O2
 
-SRC = main.c tokenize.c print_list.c init_env.c realoc.c prs_cmd.c garbage_collector.c
+SRC = main.c tokenize.c print_list.c init_env.c realoc.c prs_cmd.c garbage_collector.c expand_env.c join_char.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -12,6 +12,7 @@ $(NAME): $(OBJ)
 	$(MAKE) -C libft
 	$(MAKE) bonus -C libft
 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME) -lreadline
+	$(MAKE) clean
 
 all: $(NAME)
 

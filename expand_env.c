@@ -6,14 +6,25 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 15:36:32 by khhihi            #+#    #+#             */
-/*   Updated: 2025/05/13 16:01:43 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/05/18 15:08:41 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+char *get_env_value(t_env *env, char *key)
+{
+    while(env)
+    {
+        if (!strncmp(env->key, key, ft_strlen(key)))
+            return (env->value);
+        env = env->next;
+    }
+    return (NULL);
+}
 // Function to handle single-quoted text
-char *handle_single_quotes(const char *word, int *index, char *result) {
+char *handle_single_quotes(const char *word, int *index, char *result)
+{
     (*index)++;
     while (word[*index] && word[*index] != '\'') {
         result = ft_strjoin_char(result, word[*index]);
@@ -24,7 +35,8 @@ char *handle_single_quotes(const char *word, int *index, char *result) {
 }
 
 // Function to handle environment variable expansion
-char *expand_env_variable(const char *word, int *index, t_env *env, char *result) {
+char *expand_env_variable(const char *word, int *index, t_env *env, char *result)
+{
     int start = ++(*index);
     while (word[*index] && (ft_isalnum(word[*index]) || word[*index] == '_'))
         (*index)++;
@@ -44,7 +56,8 @@ char *expand_env_variable(const char *word, int *index, t_env *env, char *result
 }
 
 // Function to handle double-quoted text
-char *handle_double_quotes(const char *word, int *index, t_env *env, char *result) {
+char *handle_double_quotes(const char *word, int *index, t_env *env, char *result)
+{
     (*index)++;
     while (word[*index] && word[*index] != '"') {
         if (word[*index] == '$' && word[*index + 1] && (ft_isalnum(word[*index + 1]) || word[*index + 1] == '_')) {
@@ -59,7 +72,8 @@ char *handle_double_quotes(const char *word, int *index, t_env *env, char *resul
 }
 
 // Function to handle special cases like $? and $<number>
-char *handle_special_cases(const char *word, int *index, char *result) {
+char *handle_special_cases(const char *word, int *index, char *result)
+{
     if (word[*index] == '$' && word[*index + 1] == '?') {
         (*index) += 2;
         result = ft_strjoin(result, ft_itoa(0));
@@ -70,7 +84,8 @@ char *handle_special_cases(const char *word, int *index, char *result) {
 }
 
 // Main function to expand variable values
-char *expand_variable_value(char *word, t_env *env) {
+char *expand_variable_value(char *word, t_env *env)
+{
     int i = 0;
     char *result = ft_strdup("");
 
@@ -92,7 +107,8 @@ char *expand_variable_value(char *word, t_env *env) {
 }
 
 // Expand variables and remove quotes for a list of tokens
-void expand_variables_and_remove_quotes(t_token *tokens, t_env *env) {
+void expand_variables_and_remove_quotes(t_token *tokens, t_env *env)
+{
     char *expanded_value;
 
     while (tokens) {

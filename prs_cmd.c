@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 16:09:54 by khhihi            #+#    #+#             */
-/*   Updated: 2025/05/09 18:28:58 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/05/19 15:44:28 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,29 @@ void	add_cmd_to_lst(t_cmd **lst, t_cmd *new)
 	tmp->next = new;
 }
 
-void	handle_redirection(t_token **token, t_cmd *cmd)
+
+
+static int	handle_redirection(t_cmd *current_cmd, t_token **tokens)
 {
-	if (!token || !(*token) || !cmd || !(*token)->next)
-		return ; // Ensure input pointers are valid
-	if ((*token)->token_type == REDIRECT_IN || (*token)->token_type == HEREDOC)
-	{
-		*token = (*token)->next;
-		if (*token && (*token)->value)
-			cmd->input = realoc_arr(cmd->input, (*token)->value);
-	}
-	else if ((*token)->token_type == REDIRECT_OUT
-		|| (*token)->token_type == APPEND)
-	{
-		*token = (*token)->next;
-		if (*token && (*token)->value)
-			cmd->output = realoc_arr(cmd->output, (*token)->value);
-	}
+	t_redirection	*new_redir;
+
+	new_redir = ft_malloc(sizeof(t_redirection), 0);
+	if (!new_redir)
+		return (0);
+	ft_bzero(new_redir, sizeof(t_redirection));
+	new_redir->type = (*tokens)->token_type;
+	(*tokens) = (*tokens)->next;
+	if (!(*tokens) || (*tokens)->token_type == REDIRECT_IN
+		|| (*tokens)->token_type == REDIRECT_OUT
+		|| (*tokens)->token_type == APPEND || (*tokens)->token_type == HEREDOC)
+		return (0);
+	new_redir->file = ft_strdup((*tokens)->value);
+	add_redirections(current_cmd, new_redir);
+	if (new_redir->type == APPEND)
+		current_cmd->append = 1;
+	else if (new_redir->type == HEREDOC)
+		current_cmd->heredoc = 1;
+	return (1);
 }
 
 t_cmd	*prs_cmd(t_token *tokens)
@@ -76,7 +82,7 @@ t_cmd	*prs_cmd(t_token *tokens)
 		if (tokens->token_type == WORD)
 			curr_cmd->arg = realoc_arr(curr_cmd->arg, tokens->value);
 		else
-			handle_redirection(&tokens, curr_cmd);
+			handle_redirection(curr_cmd, &tokens);
 		tokens = tokens->next;
 	}
 	return (cmd_lst);

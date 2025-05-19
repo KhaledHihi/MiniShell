@@ -21,39 +21,41 @@ void	print_lst(t_env *list)
 	}
 }
 
-void	print_cmd(t_cmd *list)
-{
-	int	j;
-	int	i;
+void print_redirection_list(t_redirection *redir) {
+    printf("Redirections:\n");
+    while (redir) {
+        printf("  file: %s, type: %d, quote_type: %d\n",
+               redir->file ? redir->file : "(null)",
+               redir->type,
+               redir->quote_type);
+        redir = redir->next;
+    }
+}
 
-	j = 0;
-	while (list)
-	{
-		i = 0;
-		printf("Node:\n");
-		if (list->arg)
-		{
-			while (list->arg[i])
-			{
-				printf("  arg[%d]: %s\n", i, list->arg[i]);
-				i++;
-			}
-			j = 0;
-			if (list->input)
-				while (list->input[j])
-				{
-					printf("  input: %s\n", list->input[j]);
-					j++;
-				}
-			j = 0;
-			if (list->output)
-				while (list->output[j])
-				{
-					printf("  output: %s\n", list->output[j]);
-					j++;
-				}
-		}
-		printf("-----------\n");
-		list = list->next;
-	}
+void print_cmd(t_cmd *cmd)
+{
+    int i;
+    while (cmd) {
+        printf("Command args: ");
+        if (cmd->arg) {
+            for (i = 0; cmd->arg[i]; ++i)
+                printf("%s ", cmd->arg[i]);
+        }
+        printf("\n");
+
+        printf("Env: ");
+        if (cmd->env) {
+            for (i = 0; cmd->env[i]; ++i)
+                printf("%s ", cmd->env[i]);
+        }
+        printf("\n");
+
+        printf("append: %d, heredoc: %d, heredoc_file: %s\n",
+               cmd->append, cmd->heredoc, cmd->heredoc_file ? cmd->heredoc_file : "(null)");
+
+        print_redirection_list(cmd->redirection);
+
+        printf("----\n");
+        cmd = cmd->next;
+    }
 }

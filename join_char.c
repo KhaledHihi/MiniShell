@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   join_char.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/23 10:59:03 by khhihi            #+#    #+#             */
-/*   Updated: 2025/05/18 15:03:25 by khhihi           ###   ########.fr       */
+/*   Created: 2025/05/18 14:51:15 by khhihi            #+#    #+#             */
+/*   Updated: 2025/05/19 15:24:17 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin_char(char const *s1, char s2)
 {
 	int		i;
 	int		j;
@@ -20,14 +20,9 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	i = 0;
 	j = 0;
-	if (s1 == NULL && s2 == NULL)
+	if (s1 == NULL)
 		return (NULL);
-	if (!s1)
-		return (ft_strdup(s2));
-	if (!s2)
-		return (ft_strdup(s1));
-	r = (char *)malloc(sizeof(char)
-			* (ft_strlen(s1) + ft_strlen(s2)) + 1);
+	r = ft_malloc((ft_strlen(s1) + 2), 0);
 	if (!r)
 		return (NULL);
 	while (s1[i])
@@ -35,8 +30,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		r[i] = s1[i];
 		i++;
 	}
-	while (s2[j])
-		r[i++] = s2[j++];
+	r[i++] = s2;
 	r[i] = '\0';
 	return (r);
 }

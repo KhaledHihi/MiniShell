@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 20:24:20 by khhihi            #+#    #+#             */
-/*   Updated: 2025/05/11 20:02:47 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/05/18 15:17:29 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*get_word_value(char *input, int *i, t_quote_type *quote_type)
 				return (NULL);
 			if (quote == '\'')
 				*quote_type = SINGLE_QUOTE;
-			else if (quote == '"') 
+			else if (quote == '"')
 				*quote_type = DOUBLE_QUOTE;
 		}
 		(*i)++;
@@ -147,17 +147,8 @@ t_token	*tokenize(char *input)
 		quote_type = 0;
 		while (input[i] <= 32)
 			i++;
-		if (input[i] == '\0')
+		if (!input[i])
 			break ;
-		// if (input[i] == '\'' || input[i] == '"')
-		// {
-		// 	value = get_quote_value(input, &i, &quote_type);
-		// 	if (!value)
-		// 	{
-		// 		tokens = NULL;
-		// 		break ;
-		// 	}
-		// }
 		else if (input[i] == '|' || input[i] == '>' || input[i] == '<')
 		{
 			value = get_op(input, &i);
