@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 16:09:54 by khhihi            #+#    #+#             */
-/*   Updated: 2025/05/19 15:44:28 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/05/20 00:26:40 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ void	add_cmd_to_lst(t_cmd **lst, t_cmd *new)
 		tmp = tmp->next;
 	tmp->next = new;
 }
-
-
 
 static int	handle_redirection(t_cmd *current_cmd, t_token **tokens)
 {
