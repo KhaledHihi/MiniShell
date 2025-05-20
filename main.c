@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:10:17 by khhihi            #+#    #+#             */
-/*   Updated: 2025/05/18 15:11:27 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/05/20 14:37:24 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	parsing_cmd(char *input, char **env)
 	// print_lst(lst_env);
 	cmd = prs_cmd(tokens);
 	expand_variables_and_remove_quotes(tokens, lst_env);
-	// print_node(tokens);
+	print_node(tokens);
 	// print_cmd(cmd);
 }
 int	main(int ac, char *av[], char **env)

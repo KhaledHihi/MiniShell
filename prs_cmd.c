@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 16:09:54 by khhihi            #+#    #+#             */
-/*   Updated: 2025/05/20 00:26:40 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/05/20 15:00:18 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,34 @@ void	add_cmd_to_lst(t_cmd **lst, t_cmd *new)
 	tmp->next = new;
 }
 
+void add_redirections(t_cmd *current_cmd,t_redirection *new_redir)
+{
+	t_redirection	*lst;
+
+	if (!current_cmd->redirection)
+		current_cmd->redirection = new_redir;
+	else
+	{
+		lst = current_cmd->redirection;
+		while(lst->next)
+			lst = lst->next;
+		lst->next = new_redir;
+	}
+}
+
 static int	handle_redirection(t_cmd *current_cmd, t_token **tokens)
 {
 	t_redirection	*new_redir;
-
 	new_redir = ft_malloc(sizeof(t_redirection), 0);
 	if (!new_redir)
-		return (0);
+	return (0);
 	ft_bzero(new_redir, sizeof(t_redirection));
 	new_redir->type = (*tokens)->token_type;
 	(*tokens) = (*tokens)->next;
 	if (!(*tokens) || (*tokens)->token_type == REDIRECT_IN
-		|| (*tokens)->token_type == REDIRECT_OUT
-		|| (*tokens)->token_type == APPEND || (*tokens)->token_type == HEREDOC)
-		return (0);
+	|| (*tokens)->token_type == REDIRECT_OUT
+	|| (*tokens)->token_type == APPEND || (*tokens)->token_type == HEREDOC)
+	return (0);
 	new_redir->file = ft_strdup((*tokens)->value);
 	add_redirections(current_cmd, new_redir);
 	if (new_redir->type == APPEND)
@@ -79,8 +93,11 @@ t_cmd	*prs_cmd(t_token *tokens)
 		}
 		if (tokens->token_type == WORD)
 			curr_cmd->arg = realoc_arr(curr_cmd->arg, tokens->value);
-		else
-			handle_redirection(curr_cmd, &tokens);
+		else if (tokens->token_type == REDIRECT_IN
+			|| tokens->token_type == REDIRECT_OUT
+			|| tokens->token_type == APPEND || tokens->token_type == HEREDOC)
+			if(!handle_redirection(curr_cmd, &tokens))
+				return (NULL);
 		tokens = tokens->next;
 	}
 	return (cmd_lst);
