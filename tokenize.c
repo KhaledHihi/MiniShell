@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 20:24:20 by khhihi            #+#    #+#             */
-/*   Updated: 2025/05/18 15:17:29 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/05/21 21:17:10 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ char	*get_op(char *input, int *i)
 	{
 		op = ft_substr(input, *i, 1);
 		*i += 1;
-		if (input[*i] == '|')
+		if (input[*i] == '|'| input[0] == '|' || input[*i] == '>' || input[*i] == '<')
 			return (NULL);
 	}
 	return (op);
