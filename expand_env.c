@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 15:36:32 by khhihi            #+#    #+#             */
-/*   Updated: 2025/05/18 15:08:41 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/05/20 15:41:51 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,12 @@ char *expand_env_variable(const char *word, int *index, t_env *env, char *result
 char *handle_double_quotes(const char *word, int *index, t_env *env, char *result)
 {
     (*index)++;
-    while (word[*index] && word[*index] != '"') {
-        if (word[*index] == '$' && word[*index + 1] && (ft_isalnum(word[*index + 1]) || word[*index + 1] == '_')) {
+    while (word[*index] && word[*index] != '"')
+    {
+        if (word[*index] == '$' && word[*index + 1] && (ft_isalnum(word[*index + 1]) || word[*index + 1] == '_'))
             result = expand_env_variable(word, index, env, result);
-        } else {
+        else
+        {
             result = ft_strjoin_char(result, word[*index]);
             (*index)++;
         }
@@ -89,16 +91,18 @@ char *expand_variable_value(char *word, t_env *env)
     int i = 0;
     char *result = ft_strdup("");
 
-    while (word[i]) {
-        if (word[i] == '\'') {
+    while (word[i])
+    {
+        if (word[i] == '\'')
             result = handle_single_quotes(word, &i, result);
-        } else if (word[i] == '$' && word[i + 1] && (ft_isalpha(word[i + 1]) || word[i + 1] == '_')) {
+        else if (word[i] == '$' && word[i + 1] && (ft_isalpha(word[i + 1]) || word[i + 1] == '_'))
             result = expand_env_variable(word, &i, env, result);
-        } else if (word[i] == '"') {
+        else if (word[i] == '"')
             result = handle_double_quotes(word, &i, env, result);
-        } else if (word[i] == '$') {
+        else if (word[i] == '$')
             result = handle_special_cases(word, &i, result);
-        } else {
+        else
+        {
             result = ft_strjoin_char(result, word[i]);
             i++;
         }
