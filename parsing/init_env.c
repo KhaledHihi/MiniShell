@@ -6,11 +6,11 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 19:13:35 by khhihi            #+#    #+#             */
-/*   Updated: 2025/05/09 18:24:55 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/05/22 16:04:49 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 t_env	*create_env_node(char *env_var)
 {

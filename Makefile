@@ -1,8 +1,16 @@
 NAME = minishell
 
-CFLAGS = -Wall -Wextra -Werror -O2
+CFLAGS = -Wall -Wextra -Werror
 
-SRC = main.c tokenize.c print_list.c init_env.c realoc.c prs_cmd.c garbage_collector.c expand_env.c join_char.c
+SRC =	main.c \
+		parsing/tokenize.c \
+		parsing/print_list.c \
+		parsing/init_env.c \
+		parsing/realoc.c \
+		parsing/prs_cmd.c \
+		parsing/garbage_collector.c \
+		parsing/expand_env.c \
+		parsing/join_char.c
 
 OBJ = $(SRC:.c=.o)
 

@@ -6,11 +6,11 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 20:24:20 by khhihi            #+#    #+#             */
-/*   Updated: 2025/05/21 21:17:10 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/05/22 16:05:17 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 char	*get_quote_value(char *input, int *i, t_quote_type *quote_type)
 {
@@ -41,8 +41,8 @@ char	*get_quote_value(char *input, int *i, t_quote_type *quote_type)
 
 char	*get_word_value(char *input, int *i, t_quote_type *quote_type)
 {
-	int	start;
-	char quote;
+	int		start;
+	char	quote;
 
 	start = *i;
 	while (input[*i] && (input[*i] != '|' && input[*i] != '>'
@@ -110,7 +110,8 @@ char	*get_op(char *input, int *i)
 	{
 		op = ft_substr(input, *i, 1);
 		*i += 1;
-		if (input[*i] == '|'| input[0] == '|' || input[*i] == '>' || input[*i] == '<')
+		if (input[*i] == '|' | input[0] == '|' || input[*i] == '>'
+			|| input[*i] == '<')
 			return (NULL);
 	}
 	return (op);

@@ -6,11 +6,11 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 12:40:13 by khhihi            #+#    #+#             */
-/*   Updated: 2025/05/09 18:29:40 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/05/22 16:04:44 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	*ft_malloc(size_t size, int type)
 {

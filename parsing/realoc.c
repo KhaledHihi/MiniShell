@@ -6,11 +6,11 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 14:37:13 by khhihi            #+#    #+#             */
-/*   Updated: 2025/05/09 18:23:41 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/05/22 16:05:13 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 char	**realoc_arr(char **arr, char *str)
 {
