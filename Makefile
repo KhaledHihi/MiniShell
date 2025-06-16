@@ -10,7 +10,8 @@ SRC =	main.c \
 		parsing/prs_cmd.c \
 		parsing/garbage_collector.c \
 		parsing/expand_env.c \
-		parsing/join_char.c
+		parsing/join_char.c \
+		parsing/expand_cases.c \
 
 OBJ = $(SRC:.c=.o)
 

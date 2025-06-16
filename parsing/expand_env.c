@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 15:36:32 by khhihi            #+#    #+#             */
-/*   Updated: 2025/05/22 16:04:36 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/06/16 22:34:12 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,10 +142,18 @@ char	*expand_variable_value(char *word, t_env *env, int *heredoc)
 		else if (word[i] == '$' && word[i + 1] && (ft_isalpha(word[i + 1])
 				|| word[i + 1] == '_'))
 			result = expand_env_variable(word, &i, env, result);
+		else if (word[i + 1] && word[i] == '$' && word[i + 1] == '\'')
+			result = case_of_squote_after_var(word, &i, result);
+		else if (word[i + 1] && word[i] == '$' && word[i + 1] == '\"')
+			result = case_of_dquote_after_var(word, &i, result);
 		else if (word[i] == '"')
 			result = handle_double_quotes(word, &i, env, result);
-		else if (word[i] == '$')
-			result = handle_special_cases(word, &i, result);
+		// else if (word[i] == '$')
+		// 	result = handle_special_cases(word, &i, result);
+		else if (word[i] == '$' && word[i + 1] && word[i + 1] == '?')
+			result = case_of_var_with_exit_status(&i, result);
+		else if (word[i] == '$' && word[i + 1] && ft_isdigit(word[i + 1]))
+			result = case_of_var_start_with_digit(word, &i, result);
 		else
 			result = ft_strjoin_char(result, word[i++]);
 	}

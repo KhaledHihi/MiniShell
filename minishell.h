@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:10:41 by khhihi            #+#    #+#             */
-/*   Updated: 2025/05/22 16:08:12 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/06/16 22:23:14 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # include <stdlib.h>
 # include <sys/wait.h>
 # include <unistd.h>
+
+extern int					g_exit;
 
 typedef enum s_type
 {
@@ -89,5 +91,9 @@ void						*ft_malloc(size_t size, int type);
 void						expand_variables_and_remove_quotes(t_token *tokens,
 								t_env *env);
 char						*ft_strjoin_char(char const *s1, char s2);
+char					*case_of_var_with_exit_status(int *i,char *res);
+char					*case_of_var_start_with_digit(char *word,int *i,char *res);
+char					*case_of_dquote_after_var(char *word, int *i, char *result);
+char					*case_of_squote_after_var(char *word, int *i, char *res);
 
 #endif
