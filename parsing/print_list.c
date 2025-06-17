@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_list.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/17 13:57:26 by khhihi            #+#    #+#             */
+/*   Updated: 2025/06/17 13:57:29 by khhihi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 void	print_node(t_token *list)
@@ -11,6 +23,7 @@ void	print_node(t_token *list)
 		list = list->next;
 	}
 }
+
 void	print_lst(t_env *list)
 {
 	while (list)
@@ -53,8 +66,7 @@ void	print_cmd(t_cmd *cmd)
 				printf("%s ", cmd->env[i]);
 		}
 		printf("\n");
-		printf("append: %d, heredoc: %d, heredoc_file: %s\n", cmd->append,
-			cmd->heredoc, cmd->heredoc_file ? cmd->heredoc_file : "(null)");
+		printf("append: %d, heredoc: %d, heredoc_file: %s\n", cmd->append, cmd->heredoc, cmd->heredoc_file ? cmd->heredoc_file : "(null)");
 		print_redirection_list(cmd->redirection);
 		printf("----\n");
 		cmd = cmd->next;

@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 20:24:20 by khhihi            #+#    #+#             */
-/*   Updated: 2025/06/17 13:11:23 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/06/17 13:53:00 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_type	get_token_type(char *value)
 		return (REDIRECT_IN);
 	return (WORD);
 }
+
 char	*get_word_value(char *input, int *i, t_quote_type *quote_type)
 {
 	int		start;
@@ -78,9 +79,10 @@ char	*get_op(char *input, int *i)
 int	handle_next_token(char *input, int *i, t_token **tokens)
 {
 	char			*value;
-	t_quote_type	quote_type = NO_QUOTE;
+	t_quote_type	quote_type;
 	t_type			type;
 
+	quote_type = NO_QUOTE;
 	while (input[*i] && input[*i] <= 32)
 		(*i)++;
 	if (!input[*i])
@@ -99,19 +101,17 @@ int	handle_next_token(char *input, int *i, t_token **tokens)
 	return (1);
 }
 
-
 t_token	*tokenize(char *input)
 {
 	t_token	*tokens;
 	int		i;
-
 
 	tokens = NULL;
 	i = 0;
 	while (input[i])
 	{
 		if (!handle_next_token(input, &i, &tokens))
-			return NULL;
+			return (NULL);
 	}
-	return tokens;
+	return (tokens);
 }

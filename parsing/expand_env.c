@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 15:36:32 by khhihi            #+#    #+#             */
-/*   Updated: 2025/06/17 12:26:22 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/06/17 13:53:28 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ char	*limiter(char *limiter)
 	return (result);
 }
 
-char	*expand_env_variable(const char *word, int *i, t_env *env,
-		char *result)
+char	*expand_env_variable(const char *word, int *i, t_env *env, char *result)
 {
 	int (start), (j);
 	char *(key), *(value);
@@ -62,7 +61,7 @@ static char	*process_expansion_case(char *word, int *i, t_env *env, char *res)
 	if (word[*i] == '\'')
 		return (handle_single_quotes(word, i, res));
 	if (word[*i] == '$' && word[*i + 1] && (ft_isalpha(word[*i + 1]) || word[*i
-			+ 1] == '_'))
+				+ 1] == '_'))
 		return (expand_env_variable(word, i, env, res));
 	if (word[*i] == '$' && (word[*i + 1] == '\'' || word[*i + 1] == '"'))
 		return (case_of_quote_after_var(word, i, res, word[*i + 1]));
