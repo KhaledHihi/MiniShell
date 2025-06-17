@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 16:03:22 by khhihi            #+#    #+#             */
-/*   Updated: 2025/05/09 18:30:42 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/06/17 12:32:09 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <unistd.h>
 # include <stdint.h>
 # include "../minishell.h"
-
 
 typedef struct s_list
 {
@@ -49,6 +48,7 @@ int		ft_atoi(const char *str);
 void	*ft_memchr(const void *s, int c, size_t n);
 char	*ft_strrchr(const char *s, int c);
 char	*ft_strchr(const char *s, int c);
+int		ft_strcmp(char *s1, char *s2);
 
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);

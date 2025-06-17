@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:10:41 by khhihi            #+#    #+#             */
-/*   Updated: 2025/06/16 22:23:14 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/06/17 13:11:30 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,12 @@ void						expand_variables_and_remove_quotes(t_token *tokens,
 char						*ft_strjoin_char(char const *s1, char s2);
 char					*case_of_var_with_exit_status(int *i,char *res);
 char					*case_of_var_start_with_digit(char *word,int *i,char *res);
-char					*case_of_dquote_after_var(char *word, int *i, char *result);
-char					*case_of_squote_after_var(char *word, int *i, char *res);
+char					*handle_single_quotes(const char *word, int *index, char *result);
+char					*double_quotes(const char *word, int *index, t_env *env, char *result);
+char					*get_env_value(t_env *env, char *key);
+char	*case_of_quote_after_var(char *word, int *i, char *res, char quote_char);
+char	*expand_env_variable(const char *word, int *index, t_env *env, char *result);
+t_token	*ft_lstnew_token(char *value, t_type type, t_quote_type quote);
+void	add_token_back(t_token **head, t_token *new_token);
 
 #endif

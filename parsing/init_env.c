@@ -6,11 +6,22 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 19:13:35 by khhihi            #+#    #+#             */
-/*   Updated: 2025/05/22 16:04:49 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/06/17 12:29:10 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+char	*get_env_value(t_env *env, char *key)
+{
+	while (env)
+	{
+		if (!ft_strcmp(env->key, key))
+			return (env->value);
+		env = env->next;
+	}
+	return (NULL);
+}
 
 t_env	*create_env_node(char *env_var)
 {
