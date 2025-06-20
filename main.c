@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:10:17 by khhihi            #+#    #+#             */
-/*   Updated: 2025/06/20 10:57:05 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/06/20 11:02:19 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ int	main(int ac, char *av[], char **env)
 {
 	char	*input;
 
-	(void)env;
-	(void)av;
 	(void)ac;
 	input = NULL;
 	while (1)
@@ -62,7 +60,6 @@ int	main(int ac, char *av[], char **env)
 		if (*input)
 			add_history(input);
 		parsing_cmd(input, env);
-		printf("You entered: %s\n", input);
 		free(input);
 	}
 }

@@ -6,7 +6,7 @@ SRC =	main.c \
 		parsing/tokenize.c \
 		parsing/print_list.c \
 		parsing/init_env.c \
-		parsing/realoc.c \
+		parsing/realloc.c \
 		parsing/prs_cmd.c \
 		parsing/garbage_collector.c \
 		parsing/expand_env.c \
