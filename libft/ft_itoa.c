@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 11:26:07 by khhihi            #+#    #+#             */
-/*   Updated: 2024/11/03 21:37:58 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/06/20 09:57:29 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static char	*ft_allocate(int len, long nb)
 {
 	char	*s;
 
-	s = malloc(sizeof(char) * len + 1);
+	s = ft_malloc(sizeof(char) * len + 1, 0);
 	if (!s)
 		return (NULL);
 	s[len] = '\0';

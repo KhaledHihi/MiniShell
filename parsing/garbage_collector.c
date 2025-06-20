@@ -6,34 +6,35 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 12:40:13 by khhihi            #+#    #+#             */
-/*   Updated: 2025/05/22 16:04:44 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/06/20 10:59:06 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	*ft_malloc(size_t size, int type)
+void	*ft_malloc(size_t size, int mode)
 {
-	static t_list	*head = NULL;
+	static t_list	*head_list;
 	t_list			*new_node;
+	void			*content;
 
-	if (type == 0)
+	new_node = NULL;
+	content = NULL;
+	if (mode == 0)
 	{
-		new_node = malloc(sizeof(t_list));
-		if (!new_node)
-			return (NULL);
-		new_node->content = malloc(size);
-		new_node->next = NULL;
-		if (!head)
-			head = new_node;
-		else
+		content = malloc(size);
+		if (!content)
 		{
-			new_node->next = head;
-			head = new_node;
+			ft_malloc(0, 0);
+			exit (1);
 		}
-		return (new_node->content);
+		new_node = ft_lstnew(content);
+		ft_lstadd_back(&head_list, new_node);
 	}
-	else if (type == 1)
-		ft_lstclear(&head, free);
-	return (NULL);
+	else if (mode == 1)
+	{
+		ft_lstclear(&head_list, free);
+		head_list = NULL;
+	}
+	return (content);
 }

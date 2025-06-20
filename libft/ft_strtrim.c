@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 21:57:58 by khhihi            #+#    #+#             */
-/*   Updated: 2024/11/07 11:33:28 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/06/20 09:56:19 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*ft_strtrim(const char *s1, const char *set)
 		end--;
 	if (start > end)
 		return (ft_strdup(""));
-	str = malloc(end - start + 2);
+	str = ft_malloc(end - start + 2, 0);
 	if (str == NULL)
 		return (NULL);
 	i = 0;

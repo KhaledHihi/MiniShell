@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 10:55:58 by khhihi            #+#    #+#             */
-/*   Updated: 2024/11/07 11:40:51 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/06/20 09:57:15 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static char	*ft_alloc_word(char const *s, char c)
 	i = 0;
 	while (s[i] && s[i] != c)
 		i++;
-	ptr = malloc(sizeof(char) * (i + 1));
+	ptr = ft_malloc(sizeof(char) * (i + 1), 0);
 	if (!ptr)
 		return (NULL);
 	i = 0;
@@ -67,7 +67,7 @@ char	**ft_split(char const *s, char c)
 
 	if (!s)
 		return (NULL);
-	arr = malloc(sizeof(char *) * (ft_countw(s, c) + 1));
+	arr = ft_malloc(sizeof(char *) * (ft_countw(s, c) + 1), 0);
 	if (!arr)
 		return (NULL);
 	i = 0;

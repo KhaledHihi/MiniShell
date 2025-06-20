@@ -13,7 +13,6 @@ SRC =	main.c \
 		parsing/join_char.c \
 		parsing/expand_cases.c \
 		parsing/lst_tokenize.c \
-		parsing/handle_token.c \
 
 OBJ = $(SRC:.c=.o)
 

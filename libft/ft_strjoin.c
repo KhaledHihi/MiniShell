@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 10:59:03 by khhihi            #+#    #+#             */
-/*   Updated: 2025/05/18 15:03:25 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/06/20 09:57:04 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (ft_strdup(s2));
 	if (!s2)
 		return (ft_strdup(s1));
-	r = (char *)malloc(sizeof(char)
-			* (ft_strlen(s1) + ft_strlen(s2)) + 1);
+	r = ft_malloc(sizeof(char)
+			* (ft_strlen(s1) + ft_strlen(s2)) + 1, 0);
 	if (!r)
 		return (NULL);
 	while (s1[i])
