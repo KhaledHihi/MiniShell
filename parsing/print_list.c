@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 13:57:26 by khhihi            #+#    #+#             */
-/*   Updated: 2025/06/17 13:57:29 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/06/25 15:44:44 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,6 @@ void	print_cmd(t_cmd *cmd)
 		{
 			for (i = 0; cmd->arg[i]; ++i)
 				printf("%s ", cmd->arg[i]);
-		}
-		printf("\n");
-		printf("Env: ");
-		if (cmd->env)
-		{
-			for (i = 0; cmd->env[i]; ++i)
-				printf("%s ", cmd->env[i]);
 		}
 		printf("\n");
 		printf("append: %d, heredoc: %d, heredoc_file: %s\n", cmd->append, cmd->heredoc, cmd->heredoc_file ? cmd->heredoc_file : "(null)");

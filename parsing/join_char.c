@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 14:51:15 by khhihi            #+#    #+#             */
-/*   Updated: 2025/05/22 16:04:55 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/06/25 14:32:02 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,9 @@
 char	*ft_strjoin_char(char const *s1, char s2)
 {
 	int		i;
-	int		j;
 	char	*r;
 
 	i = 0;
-	j = 0;
 	if (s1 == NULL)
 		return (NULL);
 	r = ft_malloc((ft_strlen(s1) + 2), 0);

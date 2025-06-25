@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 20:24:20 by khhihi            #+#    #+#             */
-/*   Updated: 2025/06/17 13:53:00 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/06/25 14:54:09 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char	*get_op(char *input, int *i)
 	{
 		op = ft_substr(input, *i, 1);
 		*i += 1;
-		if (input[*i] == '|' | input[0] == '|' || input[*i] == '>'
+		if (input[*i] == '|' || input[0] == '|' || input[*i] == '>'
 			|| input[*i] == '<')
 			return (NULL);
 	}
@@ -83,10 +83,6 @@ int	handle_next_token(char *input, int *i, t_token **tokens)
 	t_type			type;
 
 	quote_type = NO_QUOTE;
-	while (input[*i] && input[*i] <= 32)
-		(*i)++;
-	if (!input[*i])
-		return (0);
 	if (input[*i] == '|' || input[*i] == '>' || input[*i] == '<')
 		value = get_op(input, i);
 	else
@@ -110,6 +106,10 @@ t_token	*tokenize(char *input)
 	i = 0;
 	while (input[i])
 	{
+		while (input[i] && input[i] <= 32)
+		i++;
+		if (!input[i])
+			break;
 		if (!handle_next_token(input, &i, &tokens))
 			return (NULL);
 	}

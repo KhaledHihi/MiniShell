@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 13:59:39 by khhihi            #+#    #+#             */
-/*   Updated: 2025/06/20 10:46:32 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/06/25 15:44:11 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,11 @@ typedef struct s_redirection
 typedef struct s_cmd
 {
 	char					**arg;
-	char					**env;
 	int						append;
 	int						heredoc;
 	char					*heredoc_file;
 	t_redirection			*redirection;
+	t_quote_type			quote_type;
 	struct s_cmd			*next;
 }							t_cmd;
 
@@ -101,5 +101,6 @@ char	*expand_env_variable(const char *word, int *index, t_env *env,
 			char *result);
 t_token	*ft_lstnew_token(char *value, t_type type, t_quote_type quote);
 void	add_token_back(t_token **head, t_token *new_token);
+int		custom_error(char *err_msg, char *arg, int exit_code, int is_builtin);
 
 #endif
