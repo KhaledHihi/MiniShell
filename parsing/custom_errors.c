@@ -6,12 +6,11 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 11:55:05 by khhihi            #+#    #+#             */
-/*   Updated: 2025/06/22 14:45:04 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/06/30 19:05:05 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
 
 int	custom_error(char *err_msg, char *arg, int exit_code, int is_builtin)
 {

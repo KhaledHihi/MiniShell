@@ -107,9 +107,9 @@ t_token	*tokenize(char *input)
 	while (input[i])
 	{
 		while (input[i] && input[i] <= 32)
-		i++;
+			i++;
 		if (!input[i])
-			break;
+			break ;
 		if (!handle_next_token(input, &i, &tokens))
 			return (NULL);
 	}

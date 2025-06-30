@@ -59,7 +59,8 @@ void	print_cmd(t_cmd *cmd)
 				printf("%s ", cmd->arg[i]);
 		}
 		printf("\n");
-		printf("append: %d, heredoc: %d, heredoc_file: %s\n", cmd->append, cmd->heredoc, cmd->heredoc_file ? cmd->heredoc_file : "(null)");
+		printf("append: %d, heredoc: %d, heredoc_file: %s\n", cmd->append,
+			cmd->heredoc, cmd->heredoc_file ? cmd->heredoc_file : "(null)");
 		print_redirection_list(cmd->redirection);
 		printf("----\n");
 		cmd = cmd->next;

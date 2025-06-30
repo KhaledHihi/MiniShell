@@ -26,7 +26,7 @@ void	*ft_malloc(size_t size, int mode)
 		if (!content)
 		{
 			ft_malloc(0, 0);
-			exit (1);
+			exit(1);
 		}
 		new_node = ft_lstnew(content);
 		ft_lstadd_back(&head_list, new_node);

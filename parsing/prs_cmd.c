@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 16:09:54 by khhihi            #+#    #+#             */
-/*   Updated: 2025/05/22 16:05:09 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/06/30 19:01:42 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,25 @@ static int	handle_redirection(t_cmd *current_cmd, t_token **tokens)
 	return (1);
 }
 
+static void	handle_words(t_token *tokens, t_cmd *current_cmd)
+{
+	int		i;
+	char	**cmd;
+
+	if (tokens->quote_type == NO_QUOTE)
+	{
+		cmd = ft_split(tokens->value, ' ');
+		i = 0;
+		while (cmd && cmd[i])
+		{
+			current_cmd->arg = realoc_arr(current_cmd->arg, cmd[i]);
+			i++;
+		}
+	}
+	else
+		current_cmd->arg = realoc_arr(current_cmd->arg, tokens->value);
+}
+
 t_cmd	*prs_cmd(t_token *tokens)
 {
 	t_cmd	*cmd_lst;
@@ -93,7 +112,7 @@ t_cmd	*prs_cmd(t_token *tokens)
 			add_cmd_to_lst(&cmd_lst, curr_cmd);
 		}
 		if (tokens->token_type == WORD)
-			curr_cmd->arg = realoc_arr(curr_cmd->arg, tokens->value);
+			handle_words(tokens, curr_cmd);
 		else if (tokens->token_type == REDIRECT_IN
 			|| tokens->token_type == REDIRECT_OUT
 			|| tokens->token_type == APPEND || tokens->token_type == HEREDOC)
