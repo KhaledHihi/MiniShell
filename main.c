@@ -6,13 +6,33 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:10:17 by khhihi            #+#    #+#             */
-/*   Updated: 2025/06/25 15:09:26 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/06/30 19:01:06 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int		g_exit;
+
+int	check_unvalide_cmds_error(t_token *tokens)
+{
+	t_token	*tmp;
+
+	tmp = tokens;
+	while (tmp)
+	{
+		if (tmp->token_type == PIPE && tmp->next == NULL)
+			return (0);
+		if (tmp->token_type == PIPE)
+		{
+			tmp = tmp->next;
+			if (tmp->token_type == PIPE)
+				return (0);
+		}
+		tmp = tmp->next;
+	}
+	return (1);
+}
 
 int	only_spaces(char *input)
 {
@@ -33,8 +53,6 @@ void	parsing_cmd(char *input, char **env)
 	t_env	*lst_env;
 	t_cmd	*cmd;
 
-	(void)cmd;
-	(void)lst_env;
 	if ((input == NULL || !ft_strncmp(input, "exit", 4))
 		&& (ft_strlen(input) == 4))
 	{
@@ -52,6 +70,12 @@ void	parsing_cmd(char *input, char **env)
 	lst_env = int_env(env);
 	expand_variables_and_remove_quotes(tokens, lst_env);
 	cmd = prs_cmd(tokens);
+	if (!cmd || !check_unvalide_cmds_error(tokens))
+	{
+		g_exit = 2;
+		printf("minishell : syntax error near unexpected token\n");
+		return ;
+	}
 	// print_node(tokens);
 	print_cmd(cmd);
 
