@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anguenda <anguenda@student.42.fr>          +#+  +:+       +#+        */
+/*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 17:45:30 by anguenda          #+#    #+#             */
-/*   Updated: 2025/07/01 15:25:11 by anguenda         ###   ########.fr       */
+/*   Updated: 2025/07/01 22:12:24 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 
-#include "../includes/minishell.h"
+#include "../minishell.h"
 
 void	ft_exit(int nb)
 {

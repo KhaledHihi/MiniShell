@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anguenda <anguenda@student.42.fr>          +#+  +:+       +#+        */
+/*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 17:44:18 by anguenda          #+#    #+#             */
-/*   Updated: 2025/06/27 17:44:19 by anguenda         ###   ########.fr       */
+/*   Updated: 2025/07/01 22:11:20 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 
-#include "../../includes/minishell.h"
+#include "../../minishell.h"
 
 int	ft_get_env_len(char **env)
 {

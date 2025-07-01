@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_in_et_out_utils.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anguenda <anguenda@student.42.fr>          +#+  +:+       +#+        */
+/*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 17:44:51 by anguenda          #+#    #+#             */
-/*   Updated: 2025/07/01 15:43:55 by anguenda         ###   ########.fr       */
+/*   Updated: 2025/07/01 22:11:41 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../minishell.h"
 
 int check_for_redirections(t_commands *cmds, int is_builtin)
 {

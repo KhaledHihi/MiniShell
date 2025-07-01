@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   run_execution.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anguenda <anguenda@student.42.fr>          +#+  +:+       +#+        */
+/*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 17:44:26 by anguenda          #+#    #+#             */
-/*   Updated: 2025/07/01 16:02:31 by anguenda         ###   ########.fr       */
+/*   Updated: 2025/07/01 22:11:57 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../minishell.h"
 
 static void ft_close_duplicated_fds(int s_out, int s_in)
 {

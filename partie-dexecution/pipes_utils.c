@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   pipes_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anguenda <anguenda@student.42.fr>          +#+  +:+       +#+        */
+/*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 17:44:46 by anguenda          #+#    #+#             */
-/*   Updated: 2025/07/01 15:44:28 by anguenda         ###   ########.fr       */
+/*   Updated: 2025/07/01 22:11:32 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 
-#include "../includes/minishell.h"
+#include "../minishell.h"
 
 int	handle_input_redirections(t_redirections *redirections, t_commands *cmds)
 {

@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 13:59:39 by khhihi            #+#    #+#             */
-/*   Updated: 2025/06/25 15:44:11 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/07/01 22:39:31 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,30 @@ typedef struct s_cmd
 	struct s_cmd			*next;
 }							t_cmd;
 
+typedef struct s_exec_env
+{
+	int						is_created;
+	char					**env;
+}	t_exec_env;
+
+typedef struct s_exec_pipe
+{
+	int						index;
+	int						n_of_cmds;
+	int						is_builtin;
+	int						has_return;
+	int						*pids;
+	int						(*pipes)[2];
+}							t_exec_pipe;
+
+typedef struct s_gc
+{
+	void					*ptr;
+	struct s_gc				*next;
+}							t_gc;
+
+//parsing part
+
 t_token	*tokenize(char *input);
 void	print_node(t_token *list);
 t_env	*int_env(char **env);
@@ -102,5 +126,7 @@ char	*expand_env_variable(const char *word, int *index, t_env *env,
 t_token	*ft_lstnew_token(char *value, t_type type, t_quote_type quote);
 void	add_token_back(t_token **head, t_token *new_token);
 int		custom_error(char *err_msg, char *arg, int exit_code, int is_builtin);
+
+// execution part
 
 #endif

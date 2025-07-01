@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anguenda <anguenda@student.42.fr>          +#+  +:+       +#+        */
+/*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 17:43:33 by anguenda          #+#    #+#             */
-/*   Updated: 2025/06/27 17:43:34 by anguenda         ###   ########.fr       */
+/*   Updated: 2025/07/01 22:10:15 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 
-#include "../../includes/minishell.h"
+#include "../../minishell.h"
 
 static int	has_only_n(char *arg)
 {

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_in_et_out.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anguenda <anguenda@student.42.fr>          +#+  +:+       +#+        */
+/*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 17:45:00 by anguenda          #+#    #+#             */
-/*   Updated: 2025/07/01 15:45:34 by anguenda         ###   ########.fr       */
+/*   Updated: 2025/07/01 22:11:46 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 
-#include "../includes/minishell.h"
+#include "../minishell.h"
 
 int	redirect_output_to_file(t_commands *cmds, int is_builtin,int *exit_status)
 {

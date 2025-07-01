@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   run_extern_cmds.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anguenda <anguenda@student.42.fr>          +#+  +:+       +#+        */
+/*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 17:45:17 by anguenda          #+#    #+#             */
-/*   Updated: 2025/07/01 15:24:58 by anguenda         ###   ########.fr       */
+/*   Updated: 2025/07/01 22:12:02 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 
-#include "../includes/minishell.h"
+#include "../minishell.h"
 
 static char	*get_env_path(char **env)
 {

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   run_builtin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anguenda <anguenda@student.42.fr>          +#+  +:+       +#+        */
+/*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 17:45:06 by anguenda          #+#    #+#             */
-/*   Updated: 2025/07/01 15:24:51 by anguenda         ###   ########.fr       */
+/*   Updated: 2025/07/01 22:11:52 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 
-#include "../includes/minishell.h"
+#include "../minishell.h"
 
 int	get_env_var_index(char **env, char *var)
 {

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   execution_pipe.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anguenda <anguenda@student.42.fr>          +#+  +:+       +#+        */
+/*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 17:44:39 by anguenda          #+#    #+#             */
-/*   Updated: 2025/07/01 16:19:11 by anguenda         ###   ########.fr       */
+/*   Updated: 2025/07/01 22:11:27 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 
-#include "../includes/minishell.h"
+#include "../minishell.h"
 
 static int	handle_output_redirections(t_redirections *redirections,
 										t_commands *cmds)
