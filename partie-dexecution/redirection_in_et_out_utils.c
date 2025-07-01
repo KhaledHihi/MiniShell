@@ -6,31 +6,31 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 17:44:51 by anguenda          #+#    #+#             */
-/*   Updated: 2025/07/01 22:11:41 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/07/01 23:33:57 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int check_for_redirections(t_commands *cmds, int is_builtin)
+int check_for_redirections(t_cmd *cmds, int is_builtin)
 {
-	while (cmds && cmds->redirections)
+	while (cmds && cmds->redirection)
 	{
-		if (cmds->redirections->type == TOKEN_REDIRECT_IN)
+		if (cmds->redirection->type == REDIRECT_IN)
 		{
-			if (redirect_input_to_file(cmds, is_builtin, &g_exit_status) < 0)
+			if (redirect_input_to_file(cmds, is_builtin, &g_exit) < 0)
 				return (-1);
 		}
-		if (cmds->redirections->type == TOKEN_REDIRECT_OUT || cmds->redirections->type == TOKEN_APPEND)
+		if (cmds->redirection->type == REDIRECT_OUT || cmds->redirection->type == APPEND)
 		{
-			if (redirect_output_to_file(cmds, is_builtin,&g_exit_status) < 0)
+			if (redirect_output_to_file(cmds, is_builtin,&g_exit) < 0)
 				return (-1);
 		}
-		if (cmds->redirections->type == TOKEN_HEREDOC)
+		if (cmds->redirection->type == HEREDOC)
 		{
-			redirect_input_to_file_here_doc(cmds->here_doc_file);
+			redirect_input_to_file_here_doc(cmds->heredoc_file);
 		}
-		cmds->redirections = cmds->redirections->next;
+		cmds->redirection = cmds->redirection->next;
 	}
 	return (0);
 }
@@ -49,9 +49,9 @@ bool has_space(char *str)
 	return (false);
 }
 
-int set_output_flags(t_commands *cmd)
+int set_output_flags(t_cmd *cmd)
 {
-	if (cmd->redirections->type == TOKEN_REDIRECT_OUT)
+	if (cmd->redirection->type == TREDIRECT_OUT)
 		return (O_WRONLY | O_CREAT | O_TRUNC);
 	else
 		return (O_WRONLY | O_CREAT | O_APPEND);
@@ -70,16 +70,16 @@ int handle_ambigous_redirect(int is_builtin, int *exit_status)
 	return (0);
 }
 
-int handle_open_errors(t_commands *cmds, int is_builtin,int *exit_status)
+int handle_open_errors(t_cmd *cmds, int is_builtin,int *exit_status)
 {
 	if (is_builtin)
 	{
-		*exit_status = custom_error(ERR_PERMISSION, cmds->redirections->file,
+		*exit_status = custom_error(ERR_PERMISSION, cmds->redirection->file,
 									EXIT_FAILURE, is_builtin);
 		return (-1);
 	}
 	else
-		custom_error(ERR_PERMISSION, cmds->redirections->file,
+		custom_error(ERR_PERMISSION, cmds->redirection->file,
 					 EXIT_FAILURE, is_builtin);
 	return (0);
 }

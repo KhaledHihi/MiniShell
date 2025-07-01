@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 17:44:46 by anguenda          #+#    #+#             */
-/*   Updated: 2025/07/01 22:11:32 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/07/01 23:27:37 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 #include "../minishell.h"
 
-int	handle_input_redirections(t_redirections *redirections, t_commands *cmds)
+int	handle_input_redirections(t_redirection *redirections, t_cmd *cmds)
 {
-	t_redirections	*current;
+	t_redirection	*current;
 	int				redirected;
  
 	redirected = 0;
@@ -25,16 +25,16 @@ int	handle_input_redirections(t_redirections *redirections, t_commands *cmds)
 	current = redirections;
 	while (current)
 	{
-		if (current->type == TOKEN_REDIRECT_IN)
+		if (current->type == REDIRECT_IN)
 		{
-			redirect_input_to_file(cmds, 0, &g_exit_status);
+			redirect_input_to_file(cmds, 0, &g_exit);
 			redirected = 1;
 		}
-		else if (current->type == TOKEN_HEREDOC)
+		else if (current->type == HEREDOC)
 		{
-			if (!cmds->args && cmds->heredoc)
+			if (!cmds->arg && cmds->heredoc)
 				return (0);
-			redirect_input_to_file_here_doc(cmds->here_doc_file);
+			redirect_input_to_file_here_doc(cmds->heredoc_file);
 			return (1);
 		}
 		current = current->next;
@@ -58,7 +58,7 @@ void	close_unused_pipes(int (*pipes)[2], int n_of_pipes, int except)
 	}
 }
 
-void	wait_for_childs(t_commands *cmds, int *pids, int n_of_cmds)
+void	wait_for_childs(t_cmd *cmds, int *pids, int n_of_cmds)
 {
 	int	status;
 	int	i;
@@ -69,10 +69,10 @@ void	wait_for_childs(t_commands *cmds, int *pids, int n_of_cmds)
 	{
 		waitpid(pids[i], &status, 0);
 		if (WIFEXITED(status) && (i == n_of_cmds - 1))
-			g_exit_status = WEXITSTATUS(status);
+			g_exit = WEXITSTATUS(status);
 		else if (WIFSIGNALED(status))
-			g_exit_status = 128 + WTERMSIG(status);
-		if (g_exit_status == 130 && !cmds->heredoc)
+			g_exit = 128 + WTERMSIG(status);
+		if (g_exit == 130 && !cmds->heredoc)
 			printf("\n");
 		i++;
 	}
@@ -99,7 +99,7 @@ void	create_pipes(int (*pipes)[2], int n_of_cmds)
 		if (pipe(pipes[i]) == -1)
 		{
 			perror("an error occured while creating pipes: ");
-			g_exit_status = EXIT_FAILURE;
+			g_exit = EXIT_FAILURE;
 			return ;
 		}
 		i++;

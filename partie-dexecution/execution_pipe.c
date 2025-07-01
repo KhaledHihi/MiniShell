@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 17:44:39 by anguenda          #+#    #+#             */
-/*   Updated: 2025/07/01 22:11:27 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/07/01 23:12:04 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 #include "../minishell.h"
 
-static int	handle_output_redirections(t_redirections *redirections,
-										t_commands *cmds)
+static int	handle_output_redirections(t_redirection *redirections,
+										t_cmd *cmds)
 {
-	t_redirections	*current;
+	t_redirection	*current;
 	int				redirected;
 
 	redirected = 0;
@@ -26,15 +26,15 @@ static int	handle_output_redirections(t_redirections *redirections,
 	current = redirections;
 	while (current)
 	{
-		if (current->type == TOKEN_REDIRECT_OUT)
+		if (current->type == REDIRECT_OUT)
 		{
-			cmds->redirections->file = current->file;
-			redirect_output_to_file(cmds, 0, &g_exit_status);
+			cmds->redirection->file = current->file;
+			redirect_output_to_file(cmds, 0, &g_exit);
 			redirected = 1;
 		}
-		else if (current->type == TOKEN_APPEND)
+		else if (current->type == APPEND)
 		{
-			redirect_output_to_file(cmds, 0, &g_exit_status);
+			redirect_output_to_file(cmds, 0, &g_exit);
 			redirected = 1;
 		}
 		current = current->next;
@@ -42,63 +42,63 @@ static int	handle_output_redirections(t_redirections *redirections,
 	return (redirected);
 }
 
-static void	configure_pipeline_io(t_commands *cmds, int (*pipes)[2],
+static void	configure_pipeline_io(t_cmd *cmds, int (*pipes)[2],
 									t_exec_pipe *t_pipe)
 {
 	int (redirected_in), (redirected_out);
 	if (t_pipe->index == 0)
 	{
-		redirected_in = handle_input_redirections(cmds->redirections, cmds);
-		redirected_out = handle_output_redirections(cmds->redirections, cmds);
+		redirected_in = handle_input_redirections(cmds->redirection, cmds);
+		redirected_out = handle_output_redirections(cmds->redirection, cmds);
 		if (!redirected_out)
 			redirect_output_to_pipe(pipes[t_pipe->index][1]);
 	}
 	else if (t_pipe->index == t_pipe->n_of_cmds - 1)
 	{
-		redirected_in = handle_input_redirections(cmds->redirections, cmds);
+		redirected_in = handle_input_redirections(cmds->redirection, cmds);
 		if (!redirected_in)
 			redirect_input_to_pipe(pipes[t_pipe->index - 1][0]);
-		handle_output_redirections(cmds->redirections, cmds);
+		handle_output_redirections(cmds->redirection, cmds);
 	}
 	else
 	{
-		redirected_in = handle_input_redirections(cmds->redirections, cmds);
+		redirected_in = handle_input_redirections(cmds->redirection, cmds);
 		if (!redirected_in)
 			redirect_input_to_pipe(pipes[t_pipe->index - 1][0]);
-		redirected_out = handle_output_redirections(cmds->redirections, cmds);
+		redirected_out = handle_output_redirections(cmds->redirection, cmds);
 		if (!redirected_out)
 			redirect_output_to_pipe(pipes[t_pipe->index][1]);
 	}
 }
 
-void	handle_child_proccesses(t_commands *cmd, int (*pipes)[2],
+void	handle_child_proccesses(t_cmd *cmd, int (*pipes)[2],
 								t_exec_pipe *t_pipe, t_exec_env *exec_env)
 {
-	if (cmd->args && is_builtin(cmd->args[0]))
+	if (cmd->arg && is_builtin(cmd->arg[0]))
 	{
 		t_pipe->is_builtin = true;
 		configure_pipeline_io(cmd, pipes, t_pipe);
 		close_unused_pipes(pipes, t_pipe->n_of_cmds - 1, -1);
 		/*if (t_pipe->has_return)
 			ft_exit(g_exit_status);*/
-		g_exit_status = execute_builtin(cmd->args, exec_env, 0);
-		ft_exit(g_exit_status);
+		g_exit = execute_builtin(cmd->arg, exec_env, 0);
+		ft_exit(g_exit);
 	}
 	else
 	{
 		t_pipe->is_builtin = false;
 		configure_pipeline_io(cmd, pipes, t_pipe);
 		close_unused_pipes(pipes, t_pipe->n_of_cmds - 1, -1);
-		if (t_pipe->index != t_pipe->n_of_cmds - 1 && cmd->heredoc && cmd->args)
+		if (t_pipe->index != t_pipe->n_of_cmds - 1 && cmd->heredoc && cmd->arg)
 			ft_exit(0);
-		execute_command(cmd->args, exec_env->env);
+		execute_command(cmd->arg, exec_env->env);
 	}
 }
 
-static void	execute_pipes(t_commands *cmds, int n_of_cmds,
+static void	execute_pipes(t_cmd *cmds, int n_of_cmds,
 							t_exec_env *exec_env, t_exec_pipe *t_pipe)
 {
-	t_commands	*tmp;
+	t_cmd	*tmp;
 	int			i;
 
 	tmp = cmds;
@@ -123,7 +123,7 @@ static void	execute_pipes(t_commands *cmds, int n_of_cmds,
 	handle_parent_signals();
 }
 
-void	pipe_first(t_commands *cmds, int n_of_cmds, t_exec_env *exec_env)
+void	pipe_first(t_cmd *cmds, int n_of_cmds, t_exec_env *exec_env)
 {
 	t_exec_pipe	t_pipe;
 

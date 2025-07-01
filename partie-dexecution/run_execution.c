@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 17:44:26 by anguenda          #+#    #+#             */
-/*   Updated: 2025/07/01 22:11:57 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/07/01 23:46:40 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void ft_close_duplicated_fds(int s_out, int s_in)
 	close(s_in);
 }
 
-void builtin_second(t_commands *cmds, t_exec_env *exec_env)
+void builtin_second(t_cmd *cmds, t_exec_env *exec_env)
 {
 	int saved_stdout;
 	int saved_stdin;
@@ -29,23 +29,23 @@ void builtin_second(t_commands *cmds, t_exec_env *exec_env)
 	saved_stdin = dup(STDIN_FILENO);
 	status = check_for_redirections(cmds, true);
 	if (status >= 0)
-		status = execute_builtin(cmds->args, exec_env, g_exit_status);
+		status = execute_builtin(cmds->arg, exec_env, g_exit);
 	if (status == -1)
 		status = EXIT_FAILURE;
-	g_exit_status = status;
-	if (ft_strncmp(cmds->args[0], "exit", ft_strlen("exit")) == 0)
+	g_exit = status;
+	if (ft_strncmp(cmds->arg[0], "exit", ft_strlen("exit")) == 0)
 	{
 		printf("exit\n");
 		ft_malloc(0, 0);
 		ft_close_duplicated_fds(saved_stdout, saved_stdin);
-		ft_exit(g_exit_status);
+		ft_exit(g_exit);
 	}
 	dup2(saved_stdout, STDOUT_FILENO);
 	dup2(saved_stdin, STDIN_FILENO);
 	ft_close_duplicated_fds(saved_stdout, saved_stdin);
 }
 
-void extern_last(t_commands *cmds, t_exec_env *exec_env)
+void extern_last(t_cmd *cmds, t_exec_env *exec_env)
 {
 	int status;
 	int pid;
@@ -58,25 +58,25 @@ void extern_last(t_commands *cmds, t_exec_env *exec_env)
 	{
 		handle_child_signals();
 		check_for_redirections(cmds, false);
-		execute_command(cmds->args, exec_env->env);
+		execute_command(cmds->arg, exec_env->env);
 	}
 	signal (SIGINT, SIG_IGN);
 	waitpid(pid, &status, 0);
 	handle_parent_signals();
 	if (WIFEXITED(status))
-		g_exit_status = WEXITSTATUS(status);
+		g_exit = WEXITSTATUS(status);
 	else if (WIFSIGNALED(status))
-		g_exit_status = 128 + WTERMSIG(status);
-	if (g_exit_status == 130)
+		g_exit = 128 + WTERMSIG(status);
+	if (g_exit == 130)
 		printf("\n");
-	if (g_exit_status == 131)
+	if (g_exit == 131)
 		printf("Quit (core dumped)\n");
 }
 
-int count_n_of_cmds(t_commands *cmds)
+int count_n_of_cmds(t_cmd *cmds)
 {
 	int count;
-	t_commands *tmp;
+	t_cmd *tmp;
 
 	count = 0;
 	tmp = cmds;
@@ -88,7 +88,7 @@ int count_n_of_cmds(t_commands *cmds)
 	return (count);
 }
 
-int launch_execution(t_commands *cmds, t_exec_env *exec_env)
+int launch_execution(t_cmd *cmds, t_exec_env *exec_env)
 {
 	int n_of_cmds;
 
@@ -97,7 +97,7 @@ int launch_execution(t_commands *cmds, t_exec_env *exec_env)
 		pipe_first(cmds, n_of_cmds, exec_env);
 	else
 	{
-		if (cmds->args && is_builtin(cmds->args[0]))
+		if (cmds->arg && is_builtin(cmds->arg[0]))
 			builtin_second(cmds, exec_env);
 		else
 			extern_last(cmds, exec_env);

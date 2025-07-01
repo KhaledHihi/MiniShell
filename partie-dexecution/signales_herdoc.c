@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 17:44:33 by anguenda          #+#    #+#             */
-/*   Updated: 2025/07/01 22:12:10 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/07/01 23:47:15 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	sig_handler_here_doc(int signum)
 	if (signum == SIGINT)
 	{
 		printf("\n");
-		g_exit_status = 130;
+		g_exit = 130;
 		ft_malloc(0, 0);
-		ft_exit(g_exit_status);
+		ft_exit(g_exit);
 	}
 }
 

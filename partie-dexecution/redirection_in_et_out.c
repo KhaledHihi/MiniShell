@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 17:45:00 by anguenda          #+#    #+#             */
-/*   Updated: 2025/07/01 22:11:46 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/07/01 23:41:57 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 #include "../minishell.h"
 
-int	redirect_output_to_file(t_commands *cmds, int is_builtin,int *exit_status)
+int	redirect_output_to_file(t_cmd *cmds, int is_builtin,int *exit_status)
 {
 	int		fd;
 	char	*file;
 
-	file = cmds->redirections->file;
-	if (!file || !file[0]|| (cmds->redirections->quote_type == NO_QUOTE && has_space(file)))
+	file = cmds->redirection->file;
+	if (!file || !file[0]|| (cmds->redirection->quote_type == NO_QUOTE && has_space(file)))
 		return (handle_ambigous_redirect(is_builtin, exit_status));
 	fd = open(file, set_output_flags(cmds), 0644);
 	if (fd < 0)
@@ -30,14 +30,14 @@ int	redirect_output_to_file(t_commands *cmds, int is_builtin,int *exit_status)
 	return (0);
 }
 
-int	redirect_input_to_file(t_commands *cmds, int is_builtin,int *exit_status)
+int	redirect_input_to_file(t_cmd *cmds, int is_builtin,int *exit_status)
 {
 	int		fd;
 	char	*file;
 
-	file = cmds->redirections->file;
+	file = cmds->redirection->file;
 	if (!file || !file[0]
-		|| (cmds->redirections->quote_type == NO_QUOTE && has_space(file)))
+		|| (cmds->redirection->quote_type == NO_QUOTE && has_space(file)))
 		return (handle_ambigous_redirect(is_builtin,exit_status));
 	fd = open (file, O_RDONLY);
 	if (fd < 0)
