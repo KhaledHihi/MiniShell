@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 17:44:51 by anguenda          #+#    #+#             */
-/*   Updated: 2025/07/01 23:33:57 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/07/01 23:53:03 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ bool has_space(char *str)
 
 int set_output_flags(t_cmd *cmd)
 {
-	if (cmd->redirection->type == TREDIRECT_OUT)
+	if (cmd->redirection->type == REDIRECT_OUT)
 		return (O_WRONLY | O_CREAT | O_TRUNC);
 	else
 		return (O_WRONLY | O_CREAT | O_APPEND);
