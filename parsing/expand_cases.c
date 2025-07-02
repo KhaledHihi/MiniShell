@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 18:28:44 by khhihi            #+#    #+#             */
-/*   Updated: 2025/06/30 19:04:33 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/07/02 01:44:30 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,12 @@ char	*double_quotes(const char *word, int *index, t_env *env, char *result)
 	}
 	if (word[*index])
 		(*index)++;
+	return (result);
+}
+
+char	*case_of_word(char *word, int *i, char *result)
+{
+	result = ft_strjoin_char(result, word[*i]);
+	(*i)++;
 	return (result);
 }

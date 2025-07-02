@@ -13,7 +13,28 @@ SRC =	main.c \
 		parsing/join_char.c \
 		parsing/expand_cases.c \
 		parsing/lst_tokenize.c \
-		# parsing/custom_erroes.c \
+		parsing/custom_errors.c \
+		parsing/heredoc.c \
+		parsing/utils.c \
+		partie-dexecution/execution_pipe.c \
+		partie-dexecution/pipes_utils.c \
+		partie-dexecution/redirection_in_et_out.c \
+		partie-dexecution/redirection_in_et_out_utils.c \
+		partie-dexecution/run_builtin.c \
+		partie-dexecution/run_execution.c \
+		partie-dexecution/run_extern_cmds.c \
+		partie-dexecution/signales_herdoc.c \
+		partie-dexecution/signals.c \
+		partie-dexecution/utils.c \
+		partie-dexecution/builtins/builtin_cd.c \
+		partie-dexecution/builtins/builtin_echo.c \
+		partie-dexecution/builtins/builtin_env.c \
+		partie-dexecution/builtins/builtin_exit.c \
+		partie-dexecution/builtins/builtin_export.c \
+		partie-dexecution/builtins/builtin_pwd.c \
+		partie-dexecution/builtins/builtin_unset.c \
+		partie-dexecution/builtins/export_utils_1.c \
+		partie-dexecution/builtins/export_utils_2.c
 
 OBJ = $(SRC:.c=.o)
 

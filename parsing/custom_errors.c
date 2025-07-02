@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 11:55:05 by khhihi            #+#    #+#             */
-/*   Updated: 2025/06/30 19:05:05 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/07/02 00:52:49 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,27 @@ int	custom_error(char *err_msg, char *arg, int exit_code, int is_builtin)
 		ft_exit(exit_code);
 	}
 	return (exit_code);
+}
+void	manage_shell_errors(char *arg, char *path)
+{
+	if (!arg)
+	{
+		ft_malloc(0, 0);
+		ft_exit(EXIT_FAILURE);
+	}
+	if (!path)
+		custom_error(ERR_CMD_NOT_FOUND, arg, 127, false);
+	if (ft_strncmp(path, "no file", ft_strlen(path)) == 0)
+		custom_error(ERR_NO_FILE, arg, 127, false);
+}
+
+int	handle_fork_errors(int pid)
+{
+	if (pid == -1)
+	{
+		perror("an error occured while forking processes: ");
+		g_exit = EXIT_FAILURE;
+		return (-1);
+	}
+	return (1);
 }
