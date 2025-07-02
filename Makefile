@@ -8,6 +8,7 @@ SRC =	main.c \
 		parsing/init_env.c \
 		parsing/realloc.c \
 		parsing/prs_cmd.c \
+		parsing/parsing_utils.c \
 		parsing/garbage_collector.c \
 		parsing/expand_env.c \
 		parsing/join_char.c \
@@ -15,7 +16,7 @@ SRC =	main.c \
 		parsing/lst_tokenize.c \
 		parsing/custom_errors.c \
 		parsing/heredoc.c \
-		parsing/utils.c \
+		parsing/heredoc_utils.c \
 		partie-dexecution/execution_pipe.c \
 		partie-dexecution/pipes_utils.c \
 		partie-dexecution/redirection_in_et_out.c \

@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 13:59:39 by khhihi            #+#    #+#             */
-/*   Updated: 2025/07/02 01:46:25 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/07/02 13:05:46 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define ERR_PERMISSION "minishell: permission denied: "
 # define ERR_CMD_NOT_FOUND "minishell: command not found: "
 # define ERR_AMBIG_REDIRECT "minishell: ambiguous redirect: "
-# define PATH_MAX 1024
+// # define PATH_MAX 1024
 # define MAX_HEREDOCS 16
 
 extern int					g_exit;
@@ -80,6 +80,7 @@ typedef struct s_cmd
 {
 	char					**arg;
 	int						append;
+	int						exit_status;
 	int						heredoc;
 	char					*heredoc_file;
 	t_redirection			*redirection;
@@ -114,7 +115,7 @@ typedef struct s_gc
 
 t_token	*tokenize(char *input);
 void	print_node(t_token *list);
-t_env	*int_env(char **env);
+t_env	*init_env(char **env);
 void	print_lst(t_env *list);
 t_cmd	*prs_cmd(t_token *tokens);
 char	**realoc_arr(char **arr, char *str);
@@ -134,6 +135,8 @@ char	*expand_env_variable(const char *word, int *index, t_env *env,
 t_token	*ft_lstnew_token(char *value, t_type type, t_quote_type quote);
 void	add_token_back(t_token **head, t_token *new_token);
 int		custom_error(char *err_msg, char *arg, int exit_code, int is_builtin);
+int	check_cmds(t_token *tokens);
+void	print_error(char *msg);
 
 // Additional parsing functions
 char	*limiter(char *limiter);

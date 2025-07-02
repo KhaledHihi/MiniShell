@@ -6,13 +6,25 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:10:17 by khhihi            #+#    #+#             */
-/*   Updated: 2025/06/30 19:01:06 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/07/02 12:57:54 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int		g_exit;
+
+static int	run_here_doc(t_cmd *cmd_list, t_env *env_list)
+{
+	if (heredoc(cmd_list, env_list) == -1)
+	{
+		print_error("Error: heredoc failed\n");
+		return (0);
+	}
+	if (cmd_list->signal_detected)
+		return (0);
+	return (1);
+}
 
 int	check_unvalide_cmds_error(t_token *tokens)
 {
@@ -47,60 +59,97 @@ int	only_spaces(char *input)
 	}
 	return (1);
 }
-void	parsing_cmd(char *input, char **env)
+static void	parsing_cmd(char *input, t_exec_env *exec_env)
 {
-	t_token	*tokens;
-	t_env	*lst_env;
-	t_cmd	*cmd;
+	t_token		*tokens;
+	t_env		*env_list;
+	t_cmd		*cmd_list;
 
-	if ((input == NULL || !ft_strncmp(input, "exit", 4))
-		&& (ft_strlen(input) == 4))
-	{
-		printf("\033[1;31mexit\033[0m\n");
-		ft_malloc(0, 1);
-		free(input);
-		exit(0);
-	}
 	tokens = tokenize(input);
 	if (!tokens)
 	{
-		printf("\033[1;31mSyntax Error\033[0m\n");
+		g_exit = 2;
+		print_error("minishell: syntax error\n");
 		return ;
 	}
-	lst_env = int_env(env);
-	expand_variables_and_remove_quotes(tokens, lst_env);
-	cmd = prs_cmd(tokens);
-	if (!cmd || !check_unvalide_cmds_error(tokens))
+	env_list = init_env(exec_env->env);
+	expand_variables_and_remove_quotes(tokens, env_list);
+	cmd_list = prs_cmd(tokens);
+	if (!cmd_list || !check_cmds(tokens))
 	{
 		g_exit = 2;
-		printf("minishell : syntax error near unexpected token\n");
+		print_error("minishell: syntax error\n");
 		return ;
 	}
-	// print_node(tokens);
-	print_cmd(cmd);
-
+	if (!run_here_doc(cmd_list, env_list))
+		return ;
+	launch_execution(cmd_list, exec_env);
 }
-// void	read_line(t_list *env)
-int	main(int ac, char *av[], char **env)
+
+static void	read_line_process(t_exec_env *env)
 {
 	char	*input;
 
-	(void)ac;
-	(void)av;
-	input = NULL;
 	while (1)
 	{
-		input = readline("\033[1;92m➜  \033[1;36mminishell\033[0m ");
-		if (input == NULL)
+		input = readline("minishell> ");
+		if (!input)
+		{
+			printf("exit\n");
+			ft_malloc(0, 0);
 			break ;
-		if (*input)
+		}
+		if (ft_strlen(input) > 0)
 			add_history(input);
 		if (only_spaces(input))
 		{
 			free(input);
-			continue;
+			continue ;
 		}
 		parsing_cmd(input, env);
-		free(input);
 	}
+}
+
+static char	**create_new_env(void)
+{
+	char	**new_env;
+	char	*tmp;
+	char	*cwd;
+
+	cwd = getcwd(NULL, 0);
+	new_env = ft_malloc(sizeof(char *) * 4, 1);
+	if (!new_env)
+		return (NULL);
+	tmp = ft_strjoin("PWD=", cwd);
+	new_env[0] = ft_strdup(tmp);
+	new_env[1] = ft_strdup("SHLVL=1");
+	new_env[2] = ft_strdup("_=./minishell");
+	new_env[3] = NULL;
+	free(cwd);
+	return (new_env);
+}
+
+int	main(int ac, char *av[], char **env)
+{
+	t_exec_env	envir;
+
+	(void)av;
+	if (!env || !env[0])
+	{
+		envir.env = create_new_env();
+		envir.is_created = 1;
+	}
+	else
+	{
+		envir.env = copy_env(env);
+		envir.is_created = 0;
+	}
+	if (ac != 1)
+		custom_error("Error: run only the programme", "", 1, 0);
+	update_shell_level(&envir);
+	handle_parent_signals();
+	read_line_process(&envir);
+	ft_malloc(0, 1);
+	clear_history();
+	return (0);
 }

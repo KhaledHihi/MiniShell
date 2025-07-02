@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 19:13:35 by khhihi            #+#    #+#             */
-/*   Updated: 2025/06/17 12:29:10 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/07/02 12:52:48 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	append_env_node(t_env **lst, t_env *new_env)
 	}
 }
 
-t_env	*int_env(char **env)
+t_env	*init_env(char **env)
 {
 	t_env	*lst;
 	t_env	*new_env;

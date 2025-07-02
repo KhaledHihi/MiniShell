@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   heredoc_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 01:29:29 by khhihi            #+#    #+#             */
-/*   Updated: 2025/07/02 01:30:58 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/07/02 13:03:53 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ char	*expand_the_heredoc(char *input_heredoc, t_env *env)
 		if (input_heredoc[i] == '$' && input_heredoc[i + 1]
 			&& (ft_isalpha(input_heredoc[i + 1]) || input_heredoc[i
 					+ 1] == '_'))
-			result = case_of_normal_var(input_heredoc, &i, result, env);
+			result = expand_env_variable(input_heredoc, &i, env, result);
 		else if (input_heredoc[i] == '$' && input_heredoc[i + 1]
 			&& ft_isdigit(input_heredoc[i + 1]))
-			result = case_of_var_with_next_char_digit(input_heredoc,
+			result = case_of_var_start_with_digit(input_heredoc,
 					&i, result);
 		else if (input_heredoc[i] == '$' && input_heredoc[i + 1]
 			&& input_heredoc[i + 1] == '?')
@@ -53,7 +53,7 @@ int	count_here_doc(t_cmd *cmds, char ***files)
 		{
 			if (redir->type == HEREDOC && redir->file)
 			{
-				*files = ft_realloc_array(*files, get_tmp_file());
+				*files = realoc_arr(*files, get_tmp_file());
 				total++;
 			}
 			redir = redir->next;

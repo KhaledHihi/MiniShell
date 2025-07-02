@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 11:55:05 by khhihi            #+#    #+#             */
-/*   Updated: 2025/07/02 00:52:49 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/07/02 12:56:03 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,26 @@ int	handle_fork_errors(int pid)
 		perror("an error occured while forking processes: ");
 		g_exit = EXIT_FAILURE;
 		return (-1);
+	}
+	return (1);
+}
+
+int	check_cmds(t_token *tokens)
+{
+	t_token	*tmp_tokens;
+
+	tmp_tokens = tokens;
+	while (tmp_tokens)
+	{
+		if (tmp_tokens->token_type == PIPE && tmp_tokens->next == NULL)
+			return (0);
+		if (tmp_tokens->token_type == PIPE)
+		{
+			tmp_tokens = tmp_tokens->next;
+			if (tmp_tokens->token_type == PIPE)
+				return (0);
+		}
+		tmp_tokens = tmp_tokens->next;
 	}
 	return (1);
 }
