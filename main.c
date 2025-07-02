@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:10:17 by khhihi            #+#    #+#             */
-/*   Updated: 2025/07/02 12:57:54 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/07/02 13:22:49 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,14 +117,15 @@ static char	**create_new_env(void)
 	char	*cwd;
 
 	cwd = getcwd(NULL, 0);
-	new_env = ft_malloc(sizeof(char *) * 4, 1);
+	new_env = ft_malloc(sizeof(char *) * 5, 1);
 	if (!new_env)
 		return (NULL);
 	tmp = ft_strjoin("PWD=", cwd);
 	new_env[0] = ft_strdup(tmp);
 	new_env[1] = ft_strdup("SHLVL=1");
-	new_env[2] = ft_strdup("_=./minishell");
-	new_env[3] = NULL;
+	new_env[2] = ft_strdup("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin");
+	new_env[3] = ft_strdup("_=./minishell");
+	new_env[4] = NULL;
 	free(cwd);
 	return (new_env);
 }

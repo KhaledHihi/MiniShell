@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 13:59:39 by khhihi            #+#    #+#             */
-/*   Updated: 2025/07/02 13:05:46 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/07/02 13:20:09 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,8 @@ int		count_here_doc(t_cmd *cmds, char ***files);
 int		count_redirections(t_cmd *cmds);
 void	ign_ctrl_c_with_exit_status(int pid, int *status, int *signal_detected);
 void	unlink_files(int total_here_doc, char **files);
+void	print_error(char *msg);
+int		check_cmds(t_token *tokens);
 
 // functions that need to be implemented
 char	*expand_env_variable(const char *word, int *i, t_env *env, char *result);
