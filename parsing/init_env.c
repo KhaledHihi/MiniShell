@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 19:13:35 by khhihi            #+#    #+#             */
-/*   Updated: 2025/07/02 12:52:48 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/07/02 13:12:14 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ t_env	*create_env_node(char *env_var)
 	char	*equal_address;
 	int		key_length;
 
+	if (!env_var)
+		return (NULL);
 	new_env = ft_malloc(sizeof(t_env), 0);
 	if (!new_env)
 		return (NULL);
@@ -71,6 +73,8 @@ t_env	*init_env(char **env)
 
 	lst = NULL;
 	i = 0;
+	if (!env)
+		return (NULL);
 	while (env[i])
 	{
 		new_env = create_env_node(env[i]);
