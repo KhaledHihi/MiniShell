@@ -6,22 +6,11 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 16:09:54 by khhihi            #+#    #+#             */
-/*   Updated: 2025/07/02 15:23:47 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/07/02 16:38:59 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-t_cmd	*create_new_cmd(void)
-{
-	t_cmd	*new;
-
-	new = ft_malloc(sizeof(t_cmd), 0);
-	if (!new)
-		return (NULL);
-	ft_bzero(new, sizeof(t_cmd));
-	return (new);
-}
 
 void	add_cmd_to_lst(t_cmd **lst, t_cmd *new)
 {

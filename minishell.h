@@ -6,12 +6,12 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 13:59:39 by khhihi            #+#    #+#             */
-/*   Updated: 2025/07/02 13:20:09 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/07/02 16:37:35 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINI_SHELL_H
-# define MINI_SHELL_H
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
 # include "libft/libft.h"
 # include <fcntl.h>
@@ -23,9 +23,9 @@
 # include <stdint.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <sys/stat.h>
 # include <sys/wait.h>
 # include <unistd.h>
-# include <sys/stat.h>
 # define ERR_NO_FILE "minishell: no such file or directory: "
 # define ERR_PERMISSION "minishell: permission denied: "
 # define ERR_CMD_NOT_FOUND "minishell: command not found: "
@@ -100,7 +100,7 @@ typedef struct s_exec_pipe
 	int						index;
 	int						n_of_cmds;
 	int						is_builtin;
-	int						has_return;
+	int						has_return ;
 	int						*pids;
 	int						(*pipes)[2];
 }							t_exec_pipe;
@@ -111,7 +111,7 @@ typedef struct s_gc
 	struct s_gc				*next;
 }							t_gc;
 
-//parsing part
+// parsing part
 
 t_token	*tokenize(char *input);
 void	print_node(t_token *list);
@@ -135,8 +135,10 @@ char	*expand_env_variable(const char *word, int *index, t_env *env,
 t_token	*ft_lstnew_token(char *value, t_type type, t_quote_type quote);
 void	add_token_back(t_token **head, t_token *new_token);
 int		custom_error(char *err_msg, char *arg, int exit_code, int is_builtin);
-int	check_cmds(t_token *tokens);
+int		check_cmds(t_token *tokens);
 void	print_error(char *msg);
+int		only_spaces(char *input);
+int		check_unvalide_cmds_error(t_token *tokens);
 
 // Additional parsing functions
 char	*limiter(char *limiter);
@@ -163,7 +165,8 @@ void	print_error(char *msg);
 int		check_cmds(t_token *tokens);
 
 // functions that need to be implemented
-char	*expand_env_variable(const char *word, int *i, t_env *env, char *result);
+char	*expand_env_variable(const char *word, int *i, t_env *env,
+			char *result);
 char	*case_of_var_start_with_digit(char *word, int *i, char *res);
 char	*case_of_word(char *input_heredoc, int *i, char *result);
 char	**realoc_arr(char **arr, char *str);
@@ -195,7 +198,8 @@ void	redirect_input_to_file_here_doc(char *heredoc_file);
 int		get_env_var_index(char **env, char *var);
 bool	search_for_env_var(char **env, char *var);
 int		has_equal_sign(char *var);
-int		execute_builtin(char **args, t_exec_env *exec_env, int last_cmd_exit_status);
+int		execute_builtin(char **args, t_exec_env *exec_env,
+			int last_cmd_exit_status);
 
 // run_execution.c
 void	builtin_second(t_cmd *cmds, t_exec_env *exec_env);
@@ -208,7 +212,7 @@ void	execute_command(char **args, char **env);
 
 // execution_pipe.c
 void	handle_child_proccesses(t_cmd *cmd, int (*pipes)[2],
-		t_exec_pipe *t_pipe, t_exec_env *exec_env);
+			t_exec_pipe *t_pipe, t_exec_env *exec_env);
 void	pipe_first(t_cmd *cmds, int n_of_cmds, t_exec_env *exec_env);
 
 // signals.c

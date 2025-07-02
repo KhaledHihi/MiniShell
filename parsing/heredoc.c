@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 01:22:39 by khhihi            #+#    #+#             */
-/*   Updated: 2025/07/02 14:33:55 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/07/02 17:11:12 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,8 @@ static void	here_doc_process(t_cmd *cmds, t_env *env, char **files)
 int	heredoc(t_cmd *cmds, t_env *env)
 {
 	t_cmd	*tmp_cmds;
-	char		**files;
-	int			total_here_doc;
+	char	**files;
+	int		total_here_doc;
 
 	files = NULL;
 	total_here_doc = 0;

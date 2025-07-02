@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 11:55:05 by khhihi            #+#    #+#             */
-/*   Updated: 2025/07/02 14:33:10 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/07/02 17:12:42 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	custom_error(char *err_msg, char *arg, int exit_code, int is_builtin)
 	}
 	return (exit_code);
 }
+
 void	manage_shell_errors(char *arg, char *path)
 {
 	if (!arg)

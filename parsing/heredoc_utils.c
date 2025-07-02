@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 01:29:29 by khhihi            #+#    #+#             */
-/*   Updated: 2025/07/02 13:03:53 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/07/02 17:11:30 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ char	*expand_the_heredoc(char *input_heredoc, t_env *env)
 			result = expand_env_variable(input_heredoc, &i, env, result);
 		else if (input_heredoc[i] == '$' && input_heredoc[i + 1]
 			&& ft_isdigit(input_heredoc[i + 1]))
-			result = case_of_var_start_with_digit(input_heredoc,
-					&i, result);
+			result = case_of_var_start_with_digit(input_heredoc, &i, result);
 		else if (input_heredoc[i] == '$' && input_heredoc[i + 1]
 			&& input_heredoc[i + 1] == '?')
 			result = case_of_var_with_exit_status(&i, result);
@@ -40,7 +39,7 @@ char	*expand_the_heredoc(char *input_heredoc, t_env *env)
 
 int	count_here_doc(t_cmd *cmds, char ***files)
 {
-	t_cmd		*tmp_cmds;
+	t_cmd			*tmp_cmds;
 	t_redirection	*redir;
 	int				total;
 

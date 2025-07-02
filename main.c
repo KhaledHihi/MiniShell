@@ -6,13 +6,13 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:10:17 by khhihi            #+#    #+#             */
-/*   Updated: 2025/07/02 16:09:58 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/07/02 16:33:37 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		g_exit;
+int			g_exit;
 
 static int	run_here_doc(t_cmd *cmd_list, t_env *env_list)
 {
@@ -26,44 +26,11 @@ static int	run_here_doc(t_cmd *cmd_list, t_env *env_list)
 	return (1);
 }
 
-int	check_unvalide_cmds_error(t_token *tokens)
-{
-	t_token	*tmp;
-
-	tmp = tokens;
-	while (tmp)
-	{
-		if (tmp->token_type == PIPE && tmp->next == NULL)
-			return (0);
-		if (tmp->token_type == PIPE)
-		{
-			tmp = tmp->next;
-			if (tmp->token_type == PIPE)
-				return (0);
-		}
-		tmp = tmp->next;
-	}
-	return (1);
-}
-
-int	only_spaces(char *input)
-{
-	int	i;
-
-	i = 0;
-	while (input[i])
-	{
-		if (input[i] > 32)
-			return (0);
-		i++;
-	}
-	return (1);
-}
 static void	parsing_cmd(char *input, t_exec_env *exec_env)
 {
-	t_token		*tokens;
-	t_env		*env_list;
-	t_cmd		*cmd_list;
+	t_token	*tokens;
+	t_env	*env_list;
+	t_cmd	*cmd_list;
 
 	tokens = tokenize(input);
 	if (!tokens)
@@ -72,11 +39,9 @@ static void	parsing_cmd(char *input, t_exec_env *exec_env)
 		print_error("minishell: syntax error\n");
 		return ;
 	}
-	// print_node(tokens);
 	env_list = init_env(exec_env->env);
 	expand_variables_and_remove_quotes(tokens, env_list);
 	cmd_list = prs_cmd(tokens);
-	// print_cmd(cmd_list);
 	if (!cmd_list || !check_cmds(tokens))
 	{
 		g_exit = 2;
@@ -109,7 +74,7 @@ static void	read_line_process(t_exec_env *env)
 			continue ;
 		}
 		parsing_cmd(input, env);
-		 free(input);
+		free(input);
 	}
 }
 
