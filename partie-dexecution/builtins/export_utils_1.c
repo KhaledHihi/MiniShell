@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 17:44:13 by anguenda          #+#    #+#             */
-/*   Updated: 2025/07/01 22:11:14 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/07/02 14:34:54 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	add_var_to_env(t_exec_env *exec_env, char *var)
 	int		j;
 
 	len = ft_get_env_len(exec_env->env);
-	new_env = ft_malloc(sizeof(char *) * (len + 2), 1);
+	new_env = ft_malloc(sizeof(char *) * (len + 2), 0);
 	if (!new_env)
 		return ;
 	j = 0;

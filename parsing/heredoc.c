@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 01:22:39 by khhihi            #+#    #+#             */
-/*   Updated: 2025/07/02 01:32:38 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/07/02 14:33:55 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	handle_child_heredoc(t_cmd *cmd, t_env *env, char **files,
 			if (fd < 0)
 			{
 				perror("heredoc open");
-				ft_malloc(0, 0);
+				ft_malloc(0, 1);
 				exit(1);
 			}
 			write_in_here_doc_file(redir, env, fd);
@@ -60,7 +60,7 @@ static void	handle_child_heredoc(t_cmd *cmd, t_env *env, char **files,
 		}
 		redir = redir->next;
 	}
-	ft_malloc(0, 0);
+	ft_malloc(0, 1);
 	exit(0);
 }
 
@@ -68,7 +68,7 @@ static void	here_doc_handler(int sig)
 {
 	if (sig == SIGINT)
 	{
-		ft_malloc(0, 0);
+		ft_malloc(0, 1);
 		exit(130);
 	}
 }

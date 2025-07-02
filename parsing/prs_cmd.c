@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 16:09:54 by khhihi            #+#    #+#             */
-/*   Updated: 2025/06/30 19:01:42 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/07/02 15:23:47 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ static int	handle_redirection(t_cmd *current_cmd, t_token **tokens)
 		|| (*tokens)->token_type == APPEND || (*tokens)->token_type == HEREDOC)
 		return (0);
 	new_redir->file = ft_strdup((*tokens)->value);
+	new_redir->quote_type = (*tokens)->quote_type;
 	add_redirections(current_cmd, new_redir);
 	if (new_redir->type == APPEND)
 		current_cmd->append = 1;

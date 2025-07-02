@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 17:44:26 by anguenda          #+#    #+#             */
-/*   Updated: 2025/07/01 23:46:40 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/07/02 14:34:31 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void builtin_second(t_cmd *cmds, t_exec_env *exec_env)
 	if (ft_strncmp(cmds->arg[0], "exit", ft_strlen("exit")) == 0)
 	{
 		printf("exit\n");
-		ft_malloc(0, 0);
+		ft_malloc(0, 1);
 		ft_close_duplicated_fds(saved_stdout, saved_stdin);
 		ft_exit(g_exit);
 	}

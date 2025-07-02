@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:10:17 by khhihi            #+#    #+#             */
-/*   Updated: 2025/07/02 13:30:03 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/07/02 15:23:58 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,11 @@ static void	parsing_cmd(char *input, t_exec_env *exec_env)
 		print_error("minishell: syntax error\n");
 		return ;
 	}
+	// print_node(tokens);
 	env_list = init_env(exec_env->env);
 	expand_variables_and_remove_quotes(tokens, env_list);
 	cmd_list = prs_cmd(tokens);
+	// print_cmd(cmd_list);
 	if (!cmd_list || !check_cmds(tokens))
 	{
 		g_exit = 2;
@@ -96,7 +98,7 @@ static void	read_line_process(t_exec_env *env)
 		if (!input)
 		{
 			printf("exit\n");
-			ft_malloc(0, 0);
+			ft_malloc(0, 1);
 			break ;
 		}
 		if (ft_strlen(input) > 0)
@@ -117,7 +119,7 @@ static char	**create_new_env(void)
 	char	*cwd;
 
 	cwd = getcwd(NULL, 0);
-	new_env = ft_malloc(sizeof(char *) * 5, 1);
+	new_env = ft_malloc(sizeof(char *) * 5, 0);
 	if (!new_env)
 		return (NULL);
 	tmp = ft_strjoin("PWD=", cwd);

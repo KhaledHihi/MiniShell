@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 11:55:05 by khhihi            #+#    #+#             */
-/*   Updated: 2025/07/02 12:56:03 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/07/02 14:33:10 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	manage_shell_errors(char *arg, char *path)
 {
 	if (!arg)
 	{
-		ft_malloc(0, 0);
+		ft_malloc(0, 1);
 		ft_exit(EXIT_FAILURE);
 	}
 	if (!path)

@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 17:45:30 by anguenda          #+#    #+#             */
-/*   Updated: 2025/07/02 13:40:02 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/07/02 14:51:43 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 void	ft_exit(int nb)
 {
-	ft_malloc(0, 0);
+	ft_malloc(0, 1);
 	exit(nb);
 }
 
@@ -52,13 +52,12 @@ char	**copy_env(char **envp)
 	i = 0;
 	while (envp && envp[i])
 		i++;
-	new_env = ft_malloc(sizeof(char *) * (i + 1), 1);
+	new_env = ft_malloc(sizeof(char *) * (i + 1), 0);
 	if (!new_env)
 	{
 		perror("malloc: ");
 		return (NULL);
 	}
-	printf("%lu", sizeof(new_env));
 	i = 0;
 	while (envp && envp[i])
 	{

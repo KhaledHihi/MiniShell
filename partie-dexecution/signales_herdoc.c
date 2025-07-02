@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 17:44:33 by anguenda          #+#    #+#             */
-/*   Updated: 2025/07/01 23:47:15 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/07/02 14:34:37 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	sig_handler_here_doc(int signum)
 	{
 		printf("\n");
 		g_exit = 130;
-		ft_malloc(0, 0);
+		ft_malloc(0, 1);
 		ft_exit(g_exit);
 	}
 }

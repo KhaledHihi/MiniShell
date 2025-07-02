@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 17:44:46 by anguenda          #+#    #+#             */
-/*   Updated: 2025/07/01 23:27:37 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/07/02 14:34:20 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	handle_input_redirections(t_redirection *redirections, t_cmd *cmds)
 {
 	t_redirection	*current;
 	int				redirected;
- 
+
 	redirected = 0;
 	if (!redirections)
 		return (0);
@@ -80,8 +80,8 @@ void	wait_for_childs(t_cmd *cmds, int *pids, int n_of_cmds)
 
 void	allocate_pipes_and_pids(int (**pipes)[2], int **pids, int n_of_cmds)
 {
-	*pipes = ft_malloc(sizeof(int [2]) * (n_of_cmds - 1), 1);
-	*pids = ft_malloc(sizeof(int) * n_of_cmds, 1);
+	*pipes = ft_malloc(sizeof(int [2]) * (n_of_cmds - 1), 0);
+	*pids = ft_malloc(sizeof(int) * n_of_cmds, 0);
 	if (!pids || !pipes)
 	{
 		perror("Failed to allocate pipes or pids: ");

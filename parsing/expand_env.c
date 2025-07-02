@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 15:36:32 by khhihi            #+#    #+#             */
-/*   Updated: 2025/06/30 19:04:14 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/07/02 15:31:16 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@ static char	*process_expansion_case(char *word, int *i, t_env *env, char *res)
 		return (expand_env_variable(word, i, env, res));
 	if (word[*i] == '$' && (word[*i + 1] == '\'' || word[*i + 1] == '"'))
 		return (case_of_quote_after_var(word, i, res, word[*i + 1]));
-	if (word[*i] == '"')
-		return (double_quotes(word, i, env, res));
 	if (word[*i] == '$' && word[*i + 1] == '?')
 		return (case_of_var_with_exit_status(i, res));
+	if (word[*i] == '"')
+		return (double_quotes(word, i, env, res));
 	if (word[*i] == '$' && ft_isdigit(word[*i + 1]))
 		return (case_of_var_start_with_digit(word, i, res));
 	return (ft_strjoin_char(res, word[(*i)++]));

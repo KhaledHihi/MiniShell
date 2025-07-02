@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 18:28:44 by khhihi            #+#    #+#             */
-/*   Updated: 2025/07/02 01:44:30 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/07/02 15:38:28 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ char	*double_quotes(const char *word, int *index, t_env *env, char *result)
 		if (word[*index] == '$' && word[*index + 1] && (ft_isalnum(word[*index
 						+ 1]) || word[*index + 1] == '_'))
 			result = expand_env_variable(word, index, env, result);
+		else if (word[*index] == '$' && word[*index + 1] == '?')
+			return (case_of_var_with_exit_status(index, result));
 		else
 		{
 			result = ft_strjoin_char(result, word[*index]);
