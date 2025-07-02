@@ -44,7 +44,7 @@ static	int	get_cd_args_len(char **args)
 
 static int	change_dir_to_home(char **env, char *home, int is_created)
 {
-	char	cwd[PATH_MAX];
+	char	cwd[PATHE_MAX];
 
 	if (!home || (home && !search_for_env_var(env, "HOME")))
 	{
@@ -70,7 +70,7 @@ static int	change_dir_to_home(char **env, char *home, int is_created)
 static int	change_dir_to_path(char **env, char *path,
 								char *old_path, int is_created)
 {
-	char	cwd[PATH_MAX];
+	char	cwd[PATHE_MAX];
 
 	if (chdir(path) != 0)
 	{

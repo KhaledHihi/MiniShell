@@ -26,11 +26,12 @@
 # include <sys/stat.h>
 # include <sys/wait.h>
 # include <unistd.h>
+# include <limits.h>
 # define ERR_NO_FILE "minishell: no such file or directory: "
 # define ERR_PERMISSION "minishell: permission denied: "
 # define ERR_CMD_NOT_FOUND "minishell: command not found: "
 # define ERR_AMBIG_REDIRECT "minishell: ambiguous redirect: "
-# define PATH_MAX 1024
+# define PATHE_MAX 1024
 # define MAX_HEREDOCS 16
 
 extern int					g_exit;
