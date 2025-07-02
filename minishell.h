@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anguenda <anguenda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 13:59:39 by khhihi            #+#    #+#             */
-/*   Updated: 2025/07/02 16:37:35 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/07/02 18:24:45 by anguenda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define ERR_PERMISSION "minishell: permission denied: "
 # define ERR_CMD_NOT_FOUND "minishell: command not found: "
 # define ERR_AMBIG_REDIRECT "minishell: ambiguous redirect: "
-// # define PATH_MAX 1024
+# define PATH_MAX 1024
 # define MAX_HEREDOCS 16
 
 extern int					g_exit;

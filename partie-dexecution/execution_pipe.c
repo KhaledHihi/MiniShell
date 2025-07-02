@@ -3,19 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   execution_pipe.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anguenda <anguenda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 17:44:39 by anguenda          #+#    #+#             */
-/*   Updated: 2025/07/01 23:12:04 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/07/02 17:59:57 by anguenda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #include "../minishell.h"
 
 static int	handle_output_redirections(t_redirection *redirections,
-										t_cmd *cmds)
+									t_cmd *cmds)
 {
 	t_redirection	*current;
 	int				redirected;
@@ -43,7 +41,7 @@ static int	handle_output_redirections(t_redirection *redirections,
 }
 
 static void	configure_pipeline_io(t_cmd *cmds, int (*pipes)[2],
-									t_exec_pipe *t_pipe)
+								t_exec_pipe *t_pipe)
 {
 	int (redirected_in), (redirected_out);
 	if (t_pipe->index == 0)
@@ -72,15 +70,13 @@ static void	configure_pipeline_io(t_cmd *cmds, int (*pipes)[2],
 }
 
 void	handle_child_proccesses(t_cmd *cmd, int (*pipes)[2],
-								t_exec_pipe *t_pipe, t_exec_env *exec_env)
+							t_exec_pipe *t_pipe, t_exec_env *exec_env)
 {
 	if (cmd->arg && is_builtin(cmd->arg[0]))
 	{
 		t_pipe->is_builtin = true;
 		configure_pipeline_io(cmd, pipes, t_pipe);
 		close_unused_pipes(pipes, t_pipe->n_of_cmds - 1, -1);
-		/*if (t_pipe->has_return)
-			ft_exit(g_exit_status);*/
 		g_exit = execute_builtin(cmd->arg, exec_env, 0);
 		ft_exit(g_exit);
 	}
@@ -96,10 +92,10 @@ void	handle_child_proccesses(t_cmd *cmd, int (*pipes)[2],
 }
 
 static void	execute_pipes(t_cmd *cmds, int n_of_cmds,
-							t_exec_env *exec_env, t_exec_pipe *t_pipe)
+						t_exec_env *exec_env, t_exec_pipe *t_pipe)
 {
 	t_cmd	*tmp;
-	int			i;
+	int		i;
 
 	tmp = cmds;
 	i = 0;
@@ -115,7 +111,7 @@ static void	execute_pipes(t_cmd *cmds, int n_of_cmds,
 			handle_child_proccesses(tmp, t_pipe->pipes, t_pipe, exec_env);
 		}
 		i++;
-		tmp = tmp -> next;
+		tmp = tmp->next;
 	}
 	signal(SIGINT, SIG_IGN);
 	close_unused_pipes(t_pipe->pipes, n_of_cmds - 1, -1);

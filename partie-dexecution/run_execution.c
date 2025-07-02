@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   run_execution.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anguenda <anguenda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 17:44:26 by anguenda          #+#    #+#             */
-/*   Updated: 2025/07/02 14:34:31 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/07/02 18:21:24 by anguenda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static void ft_close_duplicated_fds(int s_out, int s_in)
+static void	ft_close_duplicated_fds(int s_out, int s_in)
 {
 	close(s_out);
 	close(s_in);
 }
 
-void builtin_second(t_cmd *cmds, t_exec_env *exec_env)
+void	builtin_second(t_cmd *cmds, t_exec_env *exec_env)
 {
-	int saved_stdout;
-	int saved_stdin;
-	int status;
+	int	saved_stdout;
+	int	saved_stdin;
+	int	status;
 
 	status = 0;
 	saved_stdout = dup(STDOUT_FILENO);
@@ -45,10 +45,10 @@ void builtin_second(t_cmd *cmds, t_exec_env *exec_env)
 	ft_close_duplicated_fds(saved_stdout, saved_stdin);
 }
 
-void extern_last(t_cmd *cmds, t_exec_env *exec_env)
+void	extern_last(t_cmd *cmds, t_exec_env *exec_env)
 {
-	int status;
-	int pid;
+	int	status;
+	int	pid;
 
 	status = 0;
 	pid = fork();
@@ -73,10 +73,10 @@ void extern_last(t_cmd *cmds, t_exec_env *exec_env)
 		printf("Quit (core dumped)\n");
 }
 
-int count_n_of_cmds(t_cmd *cmds)
+int	count_n_of_cmds(t_cmd *cmds)
 {
-	int count;
-	t_cmd *tmp;
+	int		count;
+	t_cmd	*tmp;
 
 	count = 0;
 	tmp = cmds;
@@ -88,9 +88,9 @@ int count_n_of_cmds(t_cmd *cmds)
 	return (count);
 }
 
-int launch_execution(t_cmd *cmds, t_exec_env *exec_env)
+int	launch_execution(t_cmd *cmds, t_exec_env *exec_env)
 {
-	int n_of_cmds;
+	int	n_of_cmds;
 
 	n_of_cmds = count_n_of_cmds(cmds);
 	if (n_of_cmds > 1)
