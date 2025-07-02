@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:10:17 by khhihi            #+#    #+#             */
-/*   Updated: 2025/07/02 15:23:58 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/07/02 16:09:58 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ static void	read_line_process(t_exec_env *env)
 			continue ;
 		}
 		parsing_cmd(input, env);
+		 free(input);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: khhihi <khhihi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 17:43:51 by anguenda          #+#    #+#             */
-/*   Updated: 2025/07/01 22:10:44 by khhihi           ###   ########.fr       */
+/*   Updated: 2025/07/02 15:57:11 by khhihi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	is_numeric(char *arg)
 	if (arg)
 	{
 		if ((arg[0] == '+' && !ft_isdigit(arg[1]))
-			|| (arg[0] == '-' && !ft_isdigit(arg[1])))
+			|| (arg[0] == '-' && !ft_isdigit(arg[1])) || !(ft_isdigit(arg[0])))
 			return (0);
 		i = 1;
 	}
